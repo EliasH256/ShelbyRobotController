@@ -1,0 +1,60 @@
+//
+// build.gradle in TeamCode
+//
+// Most of the definitions for building your module reside in a common, shared
+// file 'build.common.gradle'. Being factored in this way makes it easier to
+// integrate updates to the FTC into your code. If you really need to customize
+// the build definitions, you can place those customizations in this file, but
+// please think carefully as to whether such customizations are really necessary
+// before doing so.
+
+
+// Custom definitions may go here
+
+// Include common definitions from above.
+apply from: '../build.common.gradle'
+apply from: '../build.dependencies.gradle'
+
+dependencies {
+    implementation project(':FtcRobotController')
+    annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
+
+    implementation 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.acmerobotics.roadrunner:core:0.5.4'
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.3'
+
+    // NOTE: We used to use opencv module inside repo.  We are shifting to easyopencv with opencv-repackaged.
+    // We COULD use the aars through maven, but they only support 32 bit opencv, and we have been using 32 bit.
+    // (I think).  Previous way packaged the opencv .so in the RobotController apk.
+    // I cloned easyopencv and opencv-repackaged and made mods to make them build 64 bit aars.
+    // To build the 64 bit version, modify the "build.gradle" abiFilters to use the 64 bit arm instructions
+    //   buildTypes {
+    //
+    //        debug {
+    //           ndk {
+    //                abiFilters "arm64-v8a"
+    //            }
+    //        }
+    //
+    //        release {
+    //            minifyEnabled false
+    //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    //
+    //            ndk {
+    //                abiFilters "arm64-v8a"
+    //            }
+    //        }
+    //    }
+    // In the cloned repos, build using the gradlew.bat from the command line. You may need to download a specific
+    // version of the NDK. "gradlew assemble" will create the aar file and place it in the build/output/aar folder
+    // Copy the aars to lib folder in the FTCRobotBotController repo.
+    // To use 32 bit and directly use the maven repos, switch the commented lines below.
+    // And change the arm64-v8a to armeabi-v7a in ../build.common.gradle
+
+    //implementation 'org.openftc:easyopencv:1.5.2'
+    //implementation 'org.openftc:opencv-repackaged:4.5.3-B'
+    //implementation files('../libs/easyopencv-debug.aar')
+    //implementation files('../libs/OpenCV-Android-SDK-debug.aar')
+
+    //api project(path: ':opencv')
+}
