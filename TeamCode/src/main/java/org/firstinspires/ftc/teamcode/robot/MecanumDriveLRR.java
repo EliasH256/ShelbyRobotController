@@ -24,15 +24,10 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
-import org.firstinspires.ftc.teamcode.util.AxisDirection;
+
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import org.firstinspires.ftc.teamcode.util.CommonUtil;
 
@@ -72,9 +67,9 @@ public class MecanumDriveLRR extends MecanumDrive
 
     private TrajectorySequenceRunner trajectorySequenceRunner;
 
-    private static TrajectoryVelocityConstraint velConstraint =
+    private static TrajectoryVelocityConstraint VEL_CONSTRAINT =
       getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, DT_TRACK_WIDTH);
-    private static TrajectoryAccelerationConstraint accelConstraint =
+    private static TrajectoryAccelerationConstraint ACCEL_CONSTRAINT =
       getAccelerationConstraint(MAX_ACCEL);
 
     private TrajectoryFollower follower;
@@ -87,6 +82,9 @@ public class MecanumDriveLRR extends MecanumDrive
     public IMU imu;
 
     private VoltageSensor batteryVoltageSensor;
+	
+    private List<Integer> lastEncPositions = new ArrayList<>();
+    private List<Integer> lastEncVels = new ArrayList<>();
 
     private double followerTimeout = 0.5;
 
@@ -123,10 +121,10 @@ public class MecanumDriveLRR extends MecanumDrive
 
     private void init(HardwareMap hardwareMap)
     {
-        //LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
-        velConstraint =
+
+        VEL_CONSTRAINT =
           getVelocityConstraint(MAX_VEL, MAX_ANG_VEL, DT_TRACK_WIDTH);
-        accelConstraint =
+        ACCEL_CONSTRAINT =
           getAccelerationConstraint(MAX_ACCEL);
         RobotLog.dd(TAG, "Init MAX_VEL %6.2f MAX_ACCEL %6.2f DT_TRACK_W: %4.2f",
                     MAX_VEL, MAX_ACCEL, DT_TRACK_WIDTH);
@@ -139,6 +137,8 @@ public class MecanumDriveLRR extends MecanumDrive
 
         RobotLog.dd(TAG, "TRANSLATIONAL PID kP %6.4f kI %6.4f kD %6.4f HEADING_PID kP %6.4f kI %6.4f kD %6.4f",
                 TRANSLATIONAL_PID.kP, TRANSLATIONAL_PID.kI, TRANSLATIONAL_PID.kD,  HEADING_PID.kP, HEADING_PID.kI, HEADING_PID.kD);
+
+		//LynxModuleUtil.ensureMinimumFirmwareVersion(hardwareMap);
 
         batteryVoltageSensor = hardwareMap.voltageSensor.iterator().next();
 
@@ -188,9 +188,7 @@ public class MecanumDriveLRR extends MecanumDrive
             RobotLog.dd(TAG, "Motor Direction: " + motor.getDirection());
         }
 
-        setMotorPowers(0.0, 0.0, 0.0, 0.0);
-        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
         RobotLog.dd(TAG, "RUN Using Encoders = %s", RUN_USING_ENCODER?"TRUE":"FALSE");
 
@@ -202,34 +200,47 @@ public class MecanumDriveLRR extends MecanumDrive
         {
             setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
+		
+		setMotorPowers(0.0, 0.0, 0.0, 0.0);
+        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        if (RUN_USING_ENCODER && MOTOR_VELO_PID != null) {
+        if (RUN_USING_ENCODER && MOTOR_VELO_PID != null)
+		{
+            RobotLog.dd(TAG, "Setting PID Coef for MOTOR_VELO_PID");
             setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
 
-        // SBHTODO: if desired, use setLocalizer() to change the localization method
-        // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
+        // TODO: if desired, use setLocalizer() to change the localization method
+        // setLocalizer(new StandardTrackingWheelLocalizer(hardwareMap, lastTrackingEncPositions, lastTrackingEncVels));
 
-        trajectorySequenceRunner =
-            new TrajectorySequenceRunner(follower, HEADING_PID);
+
+        List<Integer> lastTrackingEncPositions = new ArrayList<>();
+        List<Integer> lastTrackingEncVels = new ArrayList<>();
+
+
+        trajectorySequenceRunner = new TrajectorySequenceRunner(
+                follower, HEADING_PID, batteryVoltageSensor,
+                lastEncPositions, lastEncVels, lastTrackingEncPositions, lastTrackingEncVels
+        );
     }
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose) {
-        return new TrajectoryBuilder(startPose, velConstraint, accelConstraint);
+        return new TrajectoryBuilder(startPose, VEL_CONSTRAINT, ACCEL_CONSTRAINT);
     }
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose, boolean reversed) {
-        return new TrajectoryBuilder(startPose, reversed, velConstraint, accelConstraint);
+        return new TrajectoryBuilder(startPose, reversed, VEL_CONSTRAINT, ACCEL_CONSTRAINT);
     }
 
     public TrajectoryBuilder trajectoryBuilder(Pose2d startPose, double startHeading) {
-        return new TrajectoryBuilder(startPose, startHeading, velConstraint, accelConstraint);
+        return new TrajectoryBuilder(startPose, startHeading, VEL_CONSTRAINT, ACCEL_CONSTRAINT);
     }
 
     public TrajectorySequenceBuilder trajectorySequenceBuilder(Pose2d startPose) {
         return new TrajectorySequenceBuilder(
             startPose,
-            velConstraint, accelConstraint,
+                VEL_CONSTRAINT, ACCEL_CONSTRAINT,
             MAX_ANG_VEL, MAX_ANG_ACCEL
         );
     }
@@ -239,9 +250,9 @@ public class MecanumDriveLRR extends MecanumDrive
         while((angle - heading) < -Math.PI) angle += 2*Math.PI;
         while((angle - heading) >  Math.PI) angle -= 2*Math.PI;
         trajectorySequenceRunner.followTrajectorySequenceAsync(
-            trajectorySequenceBuilder(getPoseEstimate())
-                .turn(angle)
-                .build()
+                trajectorySequenceBuilder(getPoseEstimate())
+                        .turn(angle)
+                        .build()
         );
     }
 
@@ -252,9 +263,9 @@ public class MecanumDriveLRR extends MecanumDrive
 
     public void followTrajectoryAsync(Trajectory trajectory) {
         trajectorySequenceRunner.followTrajectorySequenceAsync(
-            trajectorySequenceBuilder(trajectory.start())
-                .addTrajectory(trajectory)
-                .build()
+                trajectorySequenceBuilder(trajectory.start())
+                        .addTrajectory(trajectory)
+                        .build()
         );
     }
 
@@ -263,8 +274,7 @@ public class MecanumDriveLRR extends MecanumDrive
         waitForIdle();
     }
 
-    public void followTrajectorySequenceAsync(TrajectorySequence trajectorySequence)
-    {
+    public void followTrajectorySequenceAsync(TrajectorySequence trajectorySequence) {
         trajectorySequenceRunner.followTrajectorySequenceAsync(trajectorySequence);
     }
 
@@ -284,7 +294,8 @@ public class MecanumDriveLRR extends MecanumDrive
     }
 
     public void waitForIdle() {
-        while (!Thread.currentThread().isInterrupted() && isBusy()) {
+        while (!Thread.currentThread().isInterrupted() && isBusy())
+		{
             update();
         }
     }
@@ -294,13 +305,15 @@ public class MecanumDriveLRR extends MecanumDrive
     }
 
     public void setMode(DcMotor.RunMode runMode) {
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : motors) 
+		{
             if (motor != null) motor.setMode(runMode);
         }
     }
 
     public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior zeroPowerBehavior) {
-        for (DcMotorEx motor : motors) {
+        for (DcMotorEx motor : motors)
+		{
             if (motor != null) motor.setZeroPowerBehavior(zeroPowerBehavior);
         }
     }
@@ -337,21 +350,28 @@ public class MecanumDriveLRR extends MecanumDrive
 
     public List<DcMotorEx> getMotors() {return motors;}
 
-    //@NonNull
     @Override
     public List<Double> getWheelPositions() {
+        lastEncPositions.clear();
+
         List<Double> wheelPositions = new ArrayList<>();
         for (DcMotorEx motor : motors) {
-            wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
+            int position = motor.getCurrentPosition();
+            lastEncPositions.add(position);
+            wheelPositions.add(encoderTicksToInches(position));
         }
         return wheelPositions;
     }
 
     @Override
     public List<Double> getWheelVelocities() {
+        lastEncVels.clear();
+
         List<Double> wheelVelocities = new ArrayList<>();
         for (DcMotorEx motor : motors) {
-            wheelVelocities.add(encoderTicksToInches(motor.getVelocity()));
+            int vel = (int) motor.getVelocity();
+            lastEncVels.add(vel);
+            wheelVelocities.add(encoderTicksToInches(vel));
         }
         return wheelVelocities;
     }
@@ -360,108 +380,24 @@ public class MecanumDriveLRR extends MecanumDrive
     public void setMotorPowers(double v, double v1, double v2, double v3) {
         if (leftFront  != null) leftFront.setPower(v);
         if (leftRear   != null) leftRear.setPower(v1);
-        if (leftRear   != null) rightRear.setPower(v2);
+        if (rightRear  != null) rightRear.setPower(v2);
         if (rightFront != null) rightFront.setPower(v3);
     }
 
-
-
-
     @Override
-    public double getRawExternalHeading()
-    {
-        if (imuDebugging) {
-            RobotLog.dd(TAG, "getRawExternalHeading");
-        }
-        double rawExternHeading = 0.0;
-		Orientation orientation;
-        YawPitchRollAngles orientationIMU = imu.getRobotYawPitchRollAngles();
-
-        if(bot == null && imu != null)
-        {
-			rawExternHeading = orientationIMU.getYaw(AngleUnit.RADIANS);
-            if (imuDebugging) {
-                RobotLog.dd(TAG, "Robot Orientation %6.4f", rawExternHeading);
-            }
-        }
-        else if (bot != null)
-        {
-            if (imuDebugging) {
-                RobotLog.dd(TAG, "bot != getGyroAngles");
-            }
-            orientation = bot.getGyroAngles();
-			rawExternHeading = (double) orientation.firstAngle;
-        }
-        else
-        {
-            if (imuDebugging) {
-                RobotLog.dd(TAG, "Default to new Orientation");
-            }
-            orientation = new Orientation();
-			rawExternHeading = (double) orientation.firstAngle;
-        }	
-
-
-        return rawExternHeading;
+    public double getRawExternalHeading() {
+        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
     }
 
     @Override
     public Double getExternalHeadingVelocity() {
-        // TODO: This must be changed to match your configuration
-        //                           | Z axis
-        //                           |
-        //     (Motor Port Side)     |   / X axis
-        //                       ____|__/____
-        //          Y axis     / *   | /    /|   (IO Side)
-        //          _________ /______|/    //      I2C
-        //                   /___________ //     Digital
-        //                  |____________|/      Analog
-        //
-        //                 (Servo Port Side)
-        //
-        // The positive x axis points toward the USB port(s)
-        //
-        // Adjust the axis rotation rate as necessary
-        // Rotate about the z axis is the default assuming your REV Hub/Control Hub is laying
-        // flat on a surface
-        if (imuDebugging) {
-            RobotLog.dd(TAG, "getExternalHeadingVelocity");
-        }
-        AngularVelocity angularVelocity = imu.getRobotAngularVelocity(AngleUnit.RADIANS);
-		AngularVelocity angVelYawPitchRoll;
-        double angVel = 0.0;
-        if(bot == null && imu != null)
-        {
-            angVel = angularVelocity.zRotationRate;
-            if (imuDebugging) {
-                RobotLog.dd(TAG, "Angular Heading Velocity %6.4f", angVel);
-            }
-        }
-        else if(bot != null)
-        {
-            if (imuDebugging) {
-                RobotLog.dd(TAG, "bot != getGyroAngles");
-            }
-            angVelYawPitchRoll = bot.getGyroVelocity();
-			angVel = (double) angVelYawPitchRoll.zRotationRate;
-        }
-        else
-        {
-            if (imuDebugging) {
-                RobotLog.dd(TAG, "Default to new Orientation");
-            }
-            angVelYawPitchRoll = new AngularVelocity();
-		    angVel = (double) angVelYawPitchRoll.zRotationRate;
-        }
-
-        return angVel;
+        return (double) imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
     }
 
-    public static TrajectoryVelocityConstraint
-      getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {
+    public static TrajectoryVelocityConstraint getVelocityConstraint(double maxVel, double maxAngularVel, double trackWidth) {
         return new MinVelocityConstraint(Arrays.asList(
-            new AngularVelocityConstraint(maxAngularVel),
-            new MecanumVelocityConstraint(maxVel, trackWidth)
+                new AngularVelocityConstraint(maxAngularVel),
+                new MecanumVelocityConstraint(maxVel, trackWidth)
         ));
     }
 

@@ -614,17 +614,7 @@ public class ShelbyBot
             RobotLog.dd(TAG, "UPD CBC:%.2f LRR:%.2f ENC:%.2f IMU:%.2f",
                 cbcTime, lrrTime, encTime, imuTime);
         }
-        /*
-        if(colorSensor != null)
-        {
-            clrRGBA = colorSensor.getNormalizedColors();
-            int clr = clrRGBA.toColor();
 
-            clrR = (clr >> 16) & 0xFF;
-            clrG = (clr >>  8) & 0xFF;
-            clrB = (clr      ) & 0xFF;
-        }
-*/
         ++updateFrame;
     }
 
