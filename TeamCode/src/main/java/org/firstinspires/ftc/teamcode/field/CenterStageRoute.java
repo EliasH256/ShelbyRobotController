@@ -32,9 +32,13 @@ public class CenterStageRoute extends Route
    {
        DropOnTapeThenBackdrop t1 = new DropOnTapeThenBackdrop(this);
        t1.makeTraj(teamElement, alliance, startPos, autonStrategy, extraPixelGrab);
-
-       MoveToPark t5 = new MoveToPark(this);
-       t5.makeTraj(parkPos, alliance);
+       if (startPos == Field.StartPos.START_BACKDROP && extraPixelGrab == Field.stacksSideExtraPixelGrab.GRAB_EXTRA_PIXEL)
+       {
+           GrabExtraTwoPixelsBackdropSide t2 = new GrabExtraTwoPixelsBackdropSide(this);
+           t2.makeTraj(teamElement, alliance, startPos, autonStrategy, extraPixelGrab);
+       }
+       MoveToPark t3 = new MoveToPark(this);
+       t3.makeTraj(parkPos, alliance);
 
        /* Always do this at the end of initTrajectories2 */
        finalizeTrajSeq();

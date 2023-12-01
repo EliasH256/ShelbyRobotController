@@ -308,15 +308,9 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
         routetoFrontStageFromCanvas = pathWayToFrontStageMenu.getCurrentChoiceObject();
         routetoBackStageFromPixelStacks = pathWayToBackStageMenu.getCurrentChoiceObject();
         pixelStackLocationPickup = pixelPickLocationMenu.getCurrentChoiceObject();
+//        extrPxlGrb = Field.stacksSideExtraPixelGrab.NO_EXTRA_PIXEL;
+        extrPxlGrb = extraPixelGrabMenu.getCurrentChoiceObject();
 
-        if(startPosition == Field.StartPos.START_BACKDROP)
-        {
-            extrPxlGrb = Field.stacksSideExtraPixelGrab.NO_EXTRA_PIXEL;
-        }
-        else
-        {
-            extrPxlGrb = extraPixelGrabMenu.getCurrentChoiceObject();
-        }
 
 
         //
