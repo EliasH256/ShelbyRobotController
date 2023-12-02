@@ -192,7 +192,6 @@ public class RobotConstants
     public static Chassis bot= Chassis.B7252;
     public static Field.Alliance alliance = Field.Alliance.RED;
     public static PositionOption startPos = Field.StartPos.START_STACKS;
-    public static PositionOption autonStrategy = Field.Route.QUALIFIER_ROUTE;
 
     public static ShelbyBot.DriveDir  DT_DIR = ShelbyBot.DriveDir.PUSHER;
     public static DcMotorSimple.Direction DT_LDIR = DcMotorSimple.Direction.REVERSE;
@@ -325,7 +324,6 @@ public class RobotConstants
         RobotLog.dd(TAG, "RobotConstants.init() " + chas);
 
         Field.StartPos sPos = (Field.StartPos)startPos;
-        Field.Route strtgy = (Field.Route)autonStrategy;
 
         switch (bot)
         {
@@ -390,20 +388,20 @@ public class RobotConstants
                 EL_EXT_MOT = Motors.MotorModel.GOBILDA_5202_19_2;
                 EL_NUM_LEVS = 6;
                 EL_LEVS = new double[EL_NUM_LEVS];
-//        EL_LEVS[0] = 0.2;
-//        EL_LEVS[1] = 2;
-//        EL_LEVS[2] = 6.065;
-//        EL_LEVS[4] = 7.08;
-//        EL_LEVS[3] = 6.5;
-//        EL_LEVS[5] = 8;
 
                 /* 2023 Robot Elbow Angles */
+//                EL_LEVS[0] = 0.2;
+//                EL_LEVS[1] = 2;
+//                EL_LEVS[2] = 5.6;
+//                EL_LEVS[3] = 6.0;
+//                EL_LEVS[4] = 6.5;
+//                EL_LEVS[5] = 8;
                 EL_LEVS[0] = 0.2;
                 EL_LEVS[1] = 2;
-                EL_LEVS[2] = 5.6;
-                EL_LEVS[3] = 6.0;
-                EL_LEVS[4] = 6.5;
-                EL_LEVS[5] = 8;
+                EL_LEVS[2] = 5.8;
+                EL_LEVS[3] = 6.2;
+                EL_LEVS[4] = 7.0;
+                EL_LEVS[5] = 8; // same value
 
                 EX_NUM_LEVS = 2;
                 EX_LEVS = new double[EL_NUM_LEVS];

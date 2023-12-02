@@ -12,11 +12,15 @@ public class MoveToPark {
         route = constructorRoute;
    }
 
-    public void makeTraj(Field.ParkLocation parkPos, Field.Alliance alliance)
+    public void makeTraj(Field.ParkLocation parkPos, Field.Alliance alliance, Field.stacksSideExtraPixelGrab extraPixelGrab)
     {
         if (alliance == Field.Alliance.BLUE)
         {
-            if(parkPos == WALLSIDE_PARK)
+            if (extraPixelGrab == Field.stacksSideExtraPixelGrab.GRAB_EXTRA_PIXEL)
+            {
+                route.addLocation(route.parkCenter,LINE,HEAD_LINEAR);
+            }
+            else if(parkPos == WALLSIDE_PARK)
             {
                 route.addEvent(Route.Action.WAIT, 0.3);
                 route.addLocation(route.parkWallAdj,LINE,HEAD_LINEAR);

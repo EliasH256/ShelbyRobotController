@@ -38,7 +38,7 @@ public class CenterStageRoute extends Route
            t2.makeTraj(teamElement, alliance, startPos, autonStrategy, extraPixelGrab);
        }
        MoveToPark t3 = new MoveToPark(this);
-       t3.makeTraj(parkPos, alliance);
+       t3.makeTraj(parkPos, alliance, extraPixelGrab);
 
        /* Always do this at the end of initTrajectories2 */
        finalizeTrajSeq();

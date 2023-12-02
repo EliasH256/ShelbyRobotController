@@ -369,6 +369,7 @@ public  int pixelSamplesSensor2 = 0;
             if (stackLvlCnt < RobotConstants.EL_NUM_LEVS -1)
             {
                 stackLvlCnt++;
+                ballRestrictionsOff = true;
                 robot.elbowMotor.moveToLevel(stackLvlCnt, RobotConstants.EL_SPD);
 
             }
@@ -384,6 +385,7 @@ public  int pixelSamplesSensor2 = 0;
             if (stackLvlCnt > 0)
             {
                 stackLvlCnt--;
+                ballRestrictionsOff = true;
                 robot.elbowMotor.moveToLevel(stackLvlCnt, EL_SPD_DWN);
 
             }
@@ -444,29 +446,47 @@ public  int pixelSamplesSensor2 = 0;
                 /* Stowed position */
              robot.wristServo.moveTo(.185);
 //                robot.wristServo.makeDeadServo();
-            } else if(elb > -750  && robot.elbowMotor.getCurSpd() >= .1 && wristRestrictionsOff){
+            }
+            else if(elb > -750  && robot.elbowMotor.getCurSpd() >= .1 && wristRestrictionsOff)
+            {
 //                robot.wristServo.makeDeadServo();
-            }else if(elb >=-950 && elb <=-850 && !wristRestrictionsOff)
+            }
+            else if(elb >=-950 && elb <=-850 && !wristRestrictionsOff)
             {
                 /* before it hits ground on the way to being stowed */
                 robot.wristServo.moveTo(1-.43);
             }
-            else if(robot.elbowMotor.getCurEnc() < -1450 && robot.elbowMotor.getCurEnc() > -1530 && robot.elbowMotor.getCurSpd() > .2 && !wristRestrictionsOff)
+            else if(robot.elbowMotor.getCurEnc() < -950 && robot.elbowMotor.getCurEnc() > -1500 && !wristRestrictionsOff)
             {
                 /* Back drop Level 1 */
-                robot.wristServo.moveTo(0.700);
+                robot.wristServo.moveTo(0.630);
             }
-            else if(robot.elbowMotor.getCurEnc() < -1550 && robot.elbowMotor.getCurEnc() > -1700 && robot.elbowMotor.getCurSpd() > .2 && !wristRestrictionsOff)
+            else if(robot.elbowMotor.getCurEnc() < -1500 && robot.elbowMotor.getCurEnc() > -1600  && !wristRestrictionsOff)
+            {
+                /* Back drop Level 1 */
+                robot.wristServo.moveTo(0.650);
+            }
+            else if(robot.elbowMotor.getCurEnc() < -1600 && robot.elbowMotor.getCurEnc() > -1700  && !wristRestrictionsOff)
             {
                 /* Back drop Level 2 */
-                robot.wristServo.moveTo(0.750);
+                robot.wristServo.moveTo(0.725);
             }
-            else if(robot.elbowMotor.getCurEnc() < -1725 && robot.elbowMotor.getCurEnc() > -1800 && robot.elbowMotor.getCurSpd() > .2 && !wristRestrictionsOff)
+            else if(robot.elbowMotor.getCurEnc() < -1700 && robot.elbowMotor.getCurEnc() > -1825  && !wristRestrictionsOff)
             {
                 /* Back drop Level 3 with extender all the way out */
                 robot.wristServo.moveTo(0.770);
             }
-            else if(robot.elbowMotor.getCurEnc() < -1850 && robot.elbowMotor.getCurEnc() > -1930 && robot.elbowMotor.getCurSpd() > .2 && !wristRestrictionsOff)
+            else if(robot.elbowMotor.getCurEnc() < -1825 && robot.elbowMotor.getCurEnc() > -1950  && !wristRestrictionsOff)
+            {
+                /* Back drop Level 3 with extender all the way out */
+                robot.wristServo.moveTo(0.770);
+            }
+            else if(robot.elbowMotor.getCurEnc() < -1950 && robot.elbowMotor.getCurEnc() > -2000  && !wristRestrictionsOff)
+            {
+                /* Back drop Level 3 with extender all the way out */
+                robot.wristServo.moveTo(0.935);
+            }
+            else if(robot.elbowMotor.getCurEnc() < -2000  && !wristRestrictionsOff)
             {
                 /* Back drop Level 3 with extender all the way out */
                 robot.wristServo.moveTo(0.935);
@@ -703,6 +723,28 @@ public  int pixelSamplesSensor2 = 0;
 
         robot.setExtenderPower(gpad2.value(ManagedGamepad.AnalogInput.R_TRIGGER_VAL)-gpad2.value(ManagedGamepad.AnalogInput.L_TRIGGER_VAL));
 
+        if (stackLvlCnt == 3 && ballRestrictionsOff)
+        {
+            robot.extenderMotor.setMode(RUN_USING_ENCODER);
+            robot.extenderMotor.moveToCnt(1400, 1);
+            ballRestrictionsOff = false;
+
+        }
+        else if (stackLvlCnt == 4 && ballRestrictionsOff)
+        {
+            robot.extenderMotor.setMode(RUN_USING_ENCODER);
+            robot.extenderMotor.moveToCnt(2850, 1);
+            ballRestrictionsOff = false;
+
+        }
+        else if (stackLvlCnt != 4 && ballRestrictionsOff)
+        {
+            robot.extenderMotor.setMode(RUN_USING_ENCODER);
+            robot.extenderMotor.moveToCnt(0, 1);
+            ballRestrictionsOff = false;
+
+        }
+
 
 
         if(gpad2.just_pressed(ManagedGamepad.Button.L_BUMP))
@@ -731,16 +773,45 @@ public  int pixelSamplesSensor2 = 0;
         if(gpad2.just_pressed(ManagedGamepad.Button.X_PS4_SQUARE))
         {
             robot.toggleIntakes();
-            robot.elbowMotor.moveToLevel(0, EL_SPD_DWN);
-            stackLvlCnt = 0;
-
+            if(robot.rearDistSensor.getDistance(DistanceUnit.CM) > 30)
+            {
+                if (robot.extenderMotor.getCurEnc() < 100)
+                {
+                    robot.elbowMotor.moveToLevel(0, EL_SPD);
+                    stackLvlCnt = 0;
+                    ballRestrictionsOff = true;
+                }
+                else if (robot.extenderMotor.getCurEnc() < 1500)
+                {
+                    robot.elbowMotor.moveToLevel(0, 0.35);
+                    stackLvlCnt = 0;
+                    ballRestrictionsOff = true;
+                }
+                else if (robot.extenderMotor.getCurEnc() > 1500)
+                {
+                    robot.elbowMotor.moveToLevel(0, 0.33);
+                    stackLvlCnt = 0;
+                    ballRestrictionsOff = true;
+                }
+            }
         }
         if(gpad2.just_pressed(ManagedGamepad.Button.A_PS4_X))
         {
             Timer timer = new Timer();
             if(robot.rearDistSensor.getDistance(DistanceUnit.CM) > 30 || robot.elbowMotor.getCurEnc() > -800 ) {
-                robot.elbowMotor.moveToLevel(1, EL_SPD);
-                stackLvlCnt = 1;
+                if (robot.extenderMotor.getCurEnc() < 100) {
+                    robot.elbowMotor.moveToLevel(1, EL_SPD);
+                    stackLvlCnt = 1;
+                    ballRestrictionsOff = true;
+                } else if (robot.extenderMotor.getCurEnc() < 1500) {
+                    robot.elbowMotor.moveToLevel(1, 0.35);
+                    stackLvlCnt = 1;
+                    ballRestrictionsOff = true;
+                } else if (robot.extenderMotor.getCurEnc() > 1500) {
+                    robot.elbowMotor.moveToLevel(1, 0.33);
+                    stackLvlCnt = 1;
+                    ballRestrictionsOff = true;
+                }
             }
             robot.sweeperServo1.moveAtRate(-0.5);
             robot.sweeperServo2.moveAtRate(-0.5);
@@ -752,15 +823,26 @@ public  int pixelSamplesSensor2 = 0;
                 }
             };
             timer.schedule(task, 500);
-
-
         }
 
-        if(gpad2.just_pressed(ManagedGamepad.Button.B_PS4_CIRCLE) && !gpad2.pressed(ManagedGamepad.Button.START))
-        {
-            robot.elbowMotor.moveToCnt(-2400, 1);
-            robot.extendr();
+        if(gpad2.just_pressed(ManagedGamepad.Button.B_PS4_CIRCLE) && !gpad2.pressed(ManagedGamepad.Button.START)) {
+            if (!ballfinalclim & !ballfinalclimout) {
+                robot.elbowMotor.moveToCnt(-2400, 1);
+                ballfinalclim = true;
+            } else if (ballfinalclim & !ballfinalclimout & robot.elbowMotor.getCurEnc() < -2300) {
+                robot.extenderMotor.setMode(RUN_USING_ENCODER);
+                robot.extenderMotor.moveToCnt(2850, 1);
+                ballfinalclimout = true;
+            } else if (ballfinalclim & ballfinalclimout) {
+                ballfinalclim = false;
+                ballfinalclimout = false;
+                robot.extenderMotor.setMode(RUN_USING_ENCODER);
+                robot.extenderMotor.moveToCnt(0, 1);
+            } else {
+                robot.elbowMotor.moveToCnt(-2400, 1);
+                ballfinalclim = true;
 
+            }
         }
         if(gpad2.pressed(ManagedGamepad.Button.START) && (gpad2.just_pressed(ManagedGamepad.Button.L_BUMP) || gpad2.just_pressed(ManagedGamepad.Button.R_BUMP)))
         {
@@ -820,34 +902,17 @@ public  int pixelSamplesSensor2 = 0;
 
         while (opModeIsActive())
         {
-//            oTimer.reset();
             update();
             u=opTimer.milliseconds();
-//            oTimer.reset();
             processControllerInputs();
             c=opTimer.milliseconds();
             processSensors();
-//            oTimer.reset();
             processDriverInputs();
             d=opTimer.milliseconds();
             processSensors();
-//            oTimer.reset();
-//            printTelem();
-//            p=opTimer.milliseconds();
-//            oTimer.reset();
-//            doLogging();
-//            L=opTimer.milliseconds();
-//            oTimer.reset();
-//            robot.finishFrame();
-//            f=opTimer.milliseconds();
-//            oTimer.reset();
-//            robot.waitForTick(20);
             w=opTimer.milliseconds();
-//            oTimer.reset();
         }
     }
-
-    double spinnerPwr = RobotConstants.SP_POWER;
     double moveAtRate = 0.0;
     private double lastMrkPos = RobotConstants.MK_ARM_STOW;
 
@@ -878,11 +943,9 @@ public  int pixelSamplesSensor2 = 0;
     private int l = 0;
 
     boolean wristRestrictionsOff = false;
-
-    private int numElem = 0;
-
-    //private PPlayRoute route;
-    boolean autoDriveActive = false;
+    boolean ballfinalclim = false;
+    boolean ballfinalclimout = false;
+    boolean ballRestrictionsOff = false;
 
     public void setENDGAMETIMOUTSECS(double endGameTimeOutTime)
     {

@@ -13,10 +13,9 @@ public class DropOnTapeThenBackdrop {
 
     public void makeTraj(Route.TeamElement teamElement, Field.Alliance alliance, PositionOption startPos, PositionOption autonStrategy, Field.stacksSideExtraPixelGrab extraPixelGrab)
     {
-        qualifierRoute(teamElement, alliance, startPos, extraPixelGrab);
+        statesRoute(teamElement, alliance, startPos, extraPixelGrab);
     }
-
-    private void qualifierRoute(Route.TeamElement teamElement, Field.Alliance alliance, PositionOption startPos, Field.stacksSideExtraPixelGrab extraPixelGrab)
+    private void statesRoute(Route.TeamElement teamElement, Field.Alliance alliance, PositionOption startPos, Field.stacksSideExtraPixelGrab extraPixelGrab)
     {
         if (alliance == Field.Alliance.RED)
         {
@@ -254,15 +253,15 @@ public class DropOnTapeThenBackdrop {
                             route.addLocation(route.dropPixelBlueCenterBackTapeAdj, LINE, HEAD_LINEAR);
                             route.addLocation(route.dropPixelBlueCenterTapeBackdrop, LINE, HEAD_LINEAR);
                             route.addFunction(route::armDropSpikePos);
-                            route.addEvent(Route.Action.WAIT, 0.5);
+                            route.addEvent(Route.Action.WAIT, 0.2);
                             route.addFunction(route::outPixel);
-                            route.addEvent(Route.Action.WAIT, 0.5);
+                            route.addEvent(Route.Action.WAIT, 0.4);
                             route.addFunction(route::armToDrop);
                             route.addEvent(Route.Action.WAIT, 0.2);
                             route.addLocation(route.moveAwayFromCBlueBackdropTape, LINE, HEAD_LINEAR);
                             route.addLocation(route.dropOnBackdropBlueCenterBackdrop, LINE, HEAD_LINEAR);
                             route.addFunction(route::outPixel);
-                            route.addEvent(Route.Action.WAIT, 0.5);
+                            route.addEvent(Route.Action.WAIT, 0.4);
                             route.addLocation(route.reverseFromBlueBackdropBk, LINE, HEAD_LINEAR);
                             break;
                         case RIGHT:

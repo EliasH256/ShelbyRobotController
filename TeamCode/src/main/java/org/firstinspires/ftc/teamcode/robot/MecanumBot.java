@@ -44,6 +44,7 @@ public class MecanumBot extends ShelbyBot
     public MotorComponent sweeperServo1 = null;
     public MotorComponent sweeperServo2 = null;
     public Intake intake = null;
+    public boolean extenderStopped = true;
 
     public double logIntakeCurSpd = 0.0;
 
@@ -274,16 +275,15 @@ public class MecanumBot extends ShelbyBot
     }
 
     public void setExtenderPower(double input){
-        if(input >= .1 && extenderMotor.getCurEnc() < EX_MAX || input <= -.1 && extenderMotor.getCurEnc() > EX_MIN){
-            extenderMotor.moveAtControlRate(input);
-        }else{
-            extenderMotor.moveAtControlRate(0);
-        }
-//        if(Math.abs( input) > 0.125) {
-//            extenderMotor.moveAtRate(input);
+//        if(input >= .1 && extenderMotor.getCurEnc() < EX_MAX || input <= -.1 && extenderMotor.getCurEnc() > EX_MIN)
+//        {
+//            extenderMotor.moveAtControlRate(input);
+//            extenderStopped = false;
 //        }
-//        else {
-//            extenderMotor.moveAtRate(0);
+//        else
+//        {
+//            extenderStopped = true;
+//            extenderMotor.moveAtControlRate(0);
 //        }
     }
 
