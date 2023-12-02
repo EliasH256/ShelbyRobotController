@@ -35,10 +35,7 @@ public class RobotConstants
 
     public static double DT_XOFFSET = 0.0;
 
-    //Spinner (duck wheel)
-    public static double SP_POWER = 0.0;
     public static double SP_TURBOPWR = 0.8;
-    public static double SP_TIMEOUT = 2.5;
     public static double SP_STEP = 0.005;
     public static DcMotorSimple.Direction SP_RED_DIR = DcMotorSimple.Direction.REVERSE;
     public static DcMotorSimple.Direction SP_BLU_DIR = DcMotorSimple.Direction.FORWARD;
@@ -327,58 +324,10 @@ public class RobotConstants
 
         switch (bot)
         {
-            case GENERIC_CHASIS:
-                RobotLog.dd(TAG, "Calibrating for Bot %s", bot);
-                EL_MIN_ENCODER = 10;
-                EL_MAX_ENCODER = 1256;
-                EL_SPD = 0.8;
-                EL_DIR = DcMotorSimple.Direction.REVERSE;
-                EL_EXT_MOT = Motors.MotorModel.GOBILDA_5202_19_2;
-                EL_NUM_LEVS = 5;
-                EL_LEVS = new double[EL_NUM_LEVS];
-                EL_LEVS[0] = 0.0;
-                EL_LEVS[1] = 5.00;
-                EL_LEVS[2] = 7.83;
-                EL_LEVS[3] = 9;
-
-
-
-                IP_IMG_TOP = 0.20;
-                IP_IMG_BOT = 0.80;
-                IP_IMG_LFT = 0.05;
-                IP_IMG_RGT = 0.95;
-
-
-                DT_LDIR = DcMotorSimple.Direction.REVERSE;
-                DT_RDIR = DcMotorSimple.Direction.FORWARD;
-
-                BOT_LEN = 13.125;
-                BOT_WID = 13.125;
-
-                MAX_VEL = 50;
-                LATERAL_MULTIPLIER = 1.122;
-                DT_MOTOR = Motors.MotorModel.GOBILDA_5202_19_2;
-                DT_EXT_GEAR_RATIO = 0.997;
-                DT_WHEEL_DIAM = 96.0/MMPERIN;
-                /* Track Width tuned via Road Runner Quick Start */
-                DT_TRACK_WIDTH = 12;
-                MOTOR_VELO_PID = new PIDFCoefficients(24.0, 0, 2.5, 12.8); //Needs RR tuning
-                /* Heading & Translation PIDs tuned via Road Runner Quick Start */
-                TRANSLATIONAL_PID = new PIDCoefficients(2, 0, 0.25);
-                HEADING_PID = new PIDCoefficients(12, 0.00, 0.3);
-
-                /* kV & KA tuned via Road Runner Quick Start in the Feed Forward */
-                kV = 0.01702;
-                kA = 0.0027;
-                kStatic = 0.0021;
-
-                kVsetManual = true;
-                RUN_USING_ENCODER = false;
-
-                break;
-
             case B7253:
             case B7252:
+            case GENERIC_CHASIS:
+            default:
                 RobotLog.dd(TAG, "Calibrating for Bot %s", bot);
                 EL_MIN_ENCODER = -2700;
                 EL_MAX_ENCODER = 200;
@@ -389,13 +338,7 @@ public class RobotConstants
                 EL_NUM_LEVS = 6;
                 EL_LEVS = new double[EL_NUM_LEVS];
 
-                /* 2023 Robot Elbow Angles */
-//                EL_LEVS[0] = 0.2;
-//                EL_LEVS[1] = 2;
-//                EL_LEVS[2] = 5.6;
-//                EL_LEVS[3] = 6.0;
-//                EL_LEVS[4] = 6.5;
-//                EL_LEVS[5] = 8;
+
                 EL_LEVS[0] = 0.2;
                 EL_LEVS[1] = 2;
                 EL_LEVS[2] = 5.8;
@@ -445,9 +388,6 @@ public class RobotConstants
                 POSE_EQUAL = 0.5;
 
                 break;
-            default:
-                DT_MOTOR = Motors.MotorModel.GOBILDA_5202_19_2;
-                break;
         }
 
         DT_CPMR = DT_MOTOR.getCpr();
@@ -484,8 +424,6 @@ public class RobotConstants
         slwAccelConstraint
                 = new ProfileAccelerationConstraint(SLW_ACCEL);
 
-        params.put("SP_POWER", SP_POWER);
-        params.put("SP_TIMEOUT", SP_TIMEOUT);
         params.put("DP_TIMEOUT", DP_TIMEOUT);
         params.put("IN_TIMEOUT", IN_TIMEOUT);
         params.put("IN_AUTO_PWR", IN_AUTO_PWR);
