@@ -62,7 +62,6 @@ public class CenterStageAuton extends InitLinearOpMode // implements FtcMenu.Men
         RobotLog.dd(TAG, "PPAuto CTOR");
         alliance = Field.Alliance.valueOf(PreferenceMgr.getAllianceColor());
         startPos = Field.StartPos.values()[PreferenceMgr.getStartPosition()];
-        autonStrategy = Field.Route.values()[PreferenceMgr.getAutonStrategy()];
         parkPos = Field.ParkLocation.values()[PreferenceMgr.getParkPosition()];
         delay    = PreferenceMgr.getDelay();
         xOffset  = PreferenceMgr.getXOffset();
@@ -271,15 +270,14 @@ public class CenterStageAuton extends InitLinearOpMode // implements FtcMenu.Men
         dashboard.displayText(4, "Pref Alliance: " + alliance);
         dashboard.displayText(5, "Pref StartPos: " + startPos);
 
-        dashboard.displayText(6, "AutonStrat:  " + autonStrategy);
-        dashboard.displayText(7, "ExtraPixel Grab SS:  " + extraPixelGrabStackSideStart);
-        dashboard.displayText(8, "Park Position:  " + parkPos);
-        dashboard.displayText(9, String.format(Locale.US, "Pref Delay: %.2f", delay));
-        dashboard.displayText(10, "Pref AutonDebug: " + autonDebug);
+        dashboard.displayText(6, "ExtraPixel Grab SS:  " + extraPixelGrabStackSideStart);
+        dashboard.displayText(7, "Park Position:  " + parkPos);
+        dashboard.displayText(8, String.format(Locale.US, "Pref Delay: %.2f", delay));
+        dashboard.displayText(9, "Pref AutonDebug: " + autonDebug);
 
-        dashboard.displayText(11, "Path to FrontStage:  " + pathToFrontStage);
-        dashboard.displayText(12, "Path to BackStage:  " + pathToBackStage);
-        dashboard.displayText(13, "PixelPickup Loc:  " + pixelPickUpLoc);
+        dashboard.displayText(10, "Path to FrontStage:  " + pathToFrontStage);
+        dashboard.displayText(11, "Path to BackStage:  " + pathToBackStage);
+        dashboard.displayText(12, "PixelPickup Loc:  " + pixelPickUpLoc);
 
 
         logData = true;
@@ -313,9 +311,9 @@ public class CenterStageAuton extends InitLinearOpMode // implements FtcMenu.Men
         setupBotComponents();
 
         /* Build our Auton Trajectories */
-        routeRight = new CenterStageRoute(robot, Route.TeamElement.RIGHT, startPos, autonStrategy, parkPos, alliance, extraPixelGrabStackSideStart, pathToFrontStage, pathToBackStage, pixelPickUpLoc);
-        routeLeft = new CenterStageRoute(robot, Route.TeamElement.LEFT, startPos, autonStrategy, parkPos, alliance, extraPixelGrabStackSideStart, pathToFrontStage, pathToBackStage, pixelPickUpLoc);
-        routeCenter = new CenterStageRoute(robot, Route.TeamElement.CENTER, startPos, autonStrategy, parkPos, alliance, extraPixelGrabStackSideStart, pathToFrontStage, pathToBackStage,pixelPickUpLoc);
+        routeRight = new CenterStageRoute(robot, Route.TeamElement.RIGHT, startPos, parkPos, alliance, extraPixelGrabStackSideStart, pathToFrontStage, pathToBackStage, pixelPickUpLoc);
+        routeLeft = new CenterStageRoute(robot, Route.TeamElement.LEFT, startPos, parkPos, alliance, extraPixelGrabStackSideStart, pathToFrontStage, pathToBackStage, pixelPickUpLoc);
+        routeCenter = new CenterStageRoute(robot, Route.TeamElement.CENTER, startPos, parkPos, alliance, extraPixelGrabStackSideStart, pathToFrontStage, pathToBackStage,pixelPickUpLoc);
 
         robot.drive.setPoseEstimate(routeCenter.start);
         ShelbyBot.DriveDir startDdir = ShelbyBot.DriveDir.PUSHER;

@@ -51,7 +51,6 @@ public abstract class Route
      public Route(MecanumBot robot,
                   TeamElement teamElement,
                   PositionOption startPos,
-                  PositionOption autonStrategy,
 	 			  Field.ParkLocation parkPos,
                   Field.Alliance alliance,
                   Field.stacksSideExtraPixelGrab extraPixelGrab,
@@ -62,7 +61,6 @@ public abstract class Route
          this.robot = robot;
          this.teamElement = teamElement;
          this.startPos = startPos;
-         this.autonStrategy = autonStrategy;
          this.parkPos  = parkPos;
          this.alliance = alliance;
          this.extraPixelGrab = extraPixelGrab;
@@ -332,7 +330,6 @@ public abstract class Route
 	protected Field.ParkLocation parkPos;
     protected PositionOption startPos;
     protected Field.Alliance alliance;
-    protected PositionOption autonStrategy;
     protected Field.stacksSideExtraPixelGrab extraPixelGrab;
     public TeamElement teamElement;
     protected Field.PathWayToFrontStage routeToFrontStage;

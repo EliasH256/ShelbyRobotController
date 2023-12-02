@@ -134,12 +134,6 @@ public abstract class Field
         DOOR_PIXELSTACK
     }
 
-    public enum Route implements PositionOption
-    {
-        QUALIFIER_ROUTE,
-        STATES_ROUTE
-    }
-
     public enum StartPos implements PositionOption
     {
         START_BACKDROP,

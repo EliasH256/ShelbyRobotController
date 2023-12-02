@@ -9,7 +9,6 @@ public class CenterStageRoute extends Route
   public CenterStageRoute(MecanumBot robot,
                           TeamElement teamElement,
                           PositionOption startPos,
-                          PositionOption autonStrategy,
 						  Field.ParkLocation parkPos,
                           Field.Alliance alliance,
                           Field.stacksSideExtraPixelGrab firstLocation,
@@ -17,7 +16,7 @@ public class CenterStageRoute extends Route
                           Field.PathWayToBackStage  routeToBackStage,
                           Field.PixelStackLoc pixelPickupLoc)
   {
-    super(robot, teamElement, startPos, autonStrategy, parkPos, alliance, firstLocation, routeToFrontStage, routeToBackStage, pixelPickupLoc);
+    super(robot, teamElement, startPos, parkPos, alliance, firstLocation, routeToFrontStage, routeToBackStage, pixelPickupLoc);
   }
 
   /*
@@ -31,11 +30,11 @@ public class CenterStageRoute extends Route
    protected void initTrajectories2()
    {
        DropOnTapeThenBackdrop t1 = new DropOnTapeThenBackdrop(this);
-       t1.makeTraj(teamElement, alliance, startPos, autonStrategy, extraPixelGrab);
+       t1.makeTraj(teamElement, alliance, startPos, extraPixelGrab);
        if (startPos == Field.StartPos.START_BACKDROP && extraPixelGrab == Field.stacksSideExtraPixelGrab.GRAB_EXTRA_PIXEL)
        {
            GrabExtraTwoPixelsBackdropSide t2 = new GrabExtraTwoPixelsBackdropSide(this);
-           t2.makeTraj(teamElement, alliance, startPos, autonStrategy, extraPixelGrab);
+           t2.makeTraj(teamElement, alliance, startPos, extraPixelGrab);
        }
        MoveToPark t3 = new MoveToPark(this);
        t3.makeTraj(parkPos, alliance, extraPixelGrab);

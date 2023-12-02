@@ -18,7 +18,6 @@ public class PreferenceMgr
    private static String botName;
    private static String alliance;
    private static int    startPos;
-   private static int autonStrgy;
    private static int    parkPos;
    private static float  delay;
    private static float  xOffset;
@@ -45,7 +44,6 @@ public class PreferenceMgr
    public static String getBotName()  { return botName; }
    public static String getAllianceColor() { return alliance; }
    public static int getStartPosition() { return startPos; }
-   public static int getAutonStrategy() { return autonStrgy; }
    public static float getDelay() { return delay; }
    public static float getXOffset() { return xOffset; }
    public static int getEnableAutonDebug() { return autonDebug; }
@@ -56,7 +54,7 @@ public class PreferenceMgr
    public void setBotName(String botName) { PreferenceMgr.botName = botName; }
    public void setAllianceColor(String allianceColor) { PreferenceMgr.alliance = allianceColor; }
    public void setStartPosition(int startPosition) { PreferenceMgr.startPos = startPosition; }
-   public void setAutonStrategy(int strategy) { PreferenceMgr.autonStrgy = strategy; }
+
    public void setParkPosition(int parkPos)   { PreferenceMgr.parkPos = parkPos; }
    public void setDelay(float delay) { PreferenceMgr.delay =  delay; }
    public void setXOffset(float offset) { PreferenceMgr.xOffset =  offset; }
@@ -78,7 +76,6 @@ public class PreferenceMgr
           botName  = prefs.getString(CLUBNAME + ".botName", "B7252");
           alliance = prefs.getString(CLUBNAME + ".alliance", "RED");
           startPos = prefs.getInt(   CLUBNAME + ".startPos",1);
-          autonStrgy = prefs.getInt(CLUBNAME + ".autonStrgy", 1);
           extraPixelGrabOnStackSideStart = prefs.getInt(CLUBNAME + ".firstLoc", 1);
           delay    = prefs.getFloat( CLUBNAME + ".delay", 0.0f);
           xOffset  = prefs.getFloat( CLUBNAME + ".xOffset", 0.0f);
@@ -103,7 +100,6 @@ public class PreferenceMgr
          editor.putString(CLUBNAME + ".botName", botName);
          editor.putString(CLUBNAME + ".alliance", alliance);
          editor.putInt(CLUBNAME + ".startPos", startPos);
-         editor.putInt(CLUBNAME + ".autonStrgy", autonStrgy);
          editor.putInt(CLUBNAME + ".parkPos", parkPos);
          editor.putFloat(CLUBNAME + ".delay", delay);
          editor.putFloat(CLUBNAME + ".xOffset", xOffset);
@@ -132,7 +128,6 @@ public class PreferenceMgr
           RobotLog.dd(TAG, "Bot:      %s", botName);
           RobotLog.dd(TAG, "Alliance: %s", alliance);
           RobotLog.dd(TAG, "startPos: %d", startPos);
-          RobotLog.dd(TAG, "autonStrgy:  %d", autonStrgy);
           RobotLog.dd(TAG, "delay:    %4.1f", delay);
           RobotLog.dd(TAG, "xOffset:  %4.1f", xOffset);
           RobotLog.dd(TAG, "extraPixelGrabOnStackSideStart:  %d", extraPixelGrabOnStackSideStart);

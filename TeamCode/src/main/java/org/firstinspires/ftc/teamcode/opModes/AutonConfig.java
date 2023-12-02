@@ -22,7 +22,6 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
     private static RobotConstants.Chassis bot;
     private static Field.Alliance allianceColor;
     private static Field.StartPos startPosition;
-    private static Field.Route autonStrategy;
     private static float delay;
     private static float xOffset;
     private static Field.AutonDebug autonDebugEnable;
@@ -98,15 +97,6 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
         catch(Exception e)
         {
             startPosition = Field.StartPos.values()[0];
-        }
-
-        try
-        {
-            autonStrategy = Field.Route.values()[PreferenceMgr.getAutonStrategy()];
-        }
-        catch(Exception e)
-        {
-            autonStrategy = Field.Route.values()[0];
         }
 
         try
@@ -208,10 +198,8 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
         if(!showBotMenu) topMenu = allianceMenu;
         FtcChoiceMenu<Field.StartPos> startPosMenu
             = new FtcChoiceMenu<>("START:", allianceMenu, this);
-        FtcChoiceMenu<Field.Route> autonStrategyMenu
-                = new FtcChoiceMenu<>("STRATEGY:", startPosMenu, this);
         FtcValueMenu  delayMenu
-            = new FtcValueMenu("Delay:",       autonStrategyMenu,     this,
+            = new FtcValueMenu("Delay:",       startPosMenu,     this,
             0.0, 20.0, 1.0, delay, "%5.2f");
         FtcValueMenu  xOffsetMenu
           = new FtcValueMenu("xOffset:",       delayMenu,     this,
@@ -246,11 +234,7 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
 
         for(Field.StartPos p : Field.StartPos.values())
         {
-            startPosMenu.addChoice(p.toString(), p, p==startPosition, autonStrategyMenu);
-        }
-        for(Field.Route p : Field.Route.values())
-        {
-            autonStrategyMenu.addChoice(p.toString(), p, p==autonStrategy, extraPixelGrabMenu);
+            startPosMenu.addChoice(p.toString(), p, p==startPosition, extraPixelGrabMenu);
         }
 
         for(Field.stacksSideExtraPixelGrab f : Field.stacksSideExtraPixelGrab.values())
@@ -299,7 +283,6 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
             bot = botMenu.getCurrentChoiceObject();
         }
         startPosition = startPosMenu.getCurrentChoiceObject();
-        autonStrategy = autonStrategyMenu.getCurrentChoiceObject();
         allianceColor = allianceMenu.getCurrentChoiceObject();
         delay = (float)delayMenu.getCurrentValue();
         xOffset = (float)xOffsetMenu.getCurrentValue();
@@ -322,7 +305,6 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
 
         prfMgr.setBotName(bot.toString());
         prfMgr.setStartPosition(startPosition.ordinal());
-        prfMgr.setAutonStrategy(autonStrategy.ordinal());
         prfMgr.setParkPosition(parkPos.ordinal());
         prfMgr.setAllianceColor(allianceColor.toString());
         prfMgr.setDelay(delay);
@@ -345,7 +327,6 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
         dashboard.displayText(lnum++, "Bot:      " + bot);
         dashboard.displayText(lnum++, "Alliance: " + allianceColor);
         dashboard.displayText(lnum++, "Start:    " + startPosition);
-        dashboard.displayText(lnum++, "Route Strategy:    " + autonStrategy);
         dashboard.displayText(lnum++, "Delay:    " + delay);
         dashboard.displayText(lnum++, "Autonomous Debug:  " + autonDebugEnable);
         dashboard.displayText(lnum++, "Park Position:  " + parkPos);
@@ -362,7 +343,6 @@ public class AutonConfig extends InitLinearOpMode implements FtcMenu.MenuButtons
         RobotLog.dd(TAG, "Bot:      %s", bot);
         RobotLog.dd(TAG, "Alliance: %s", allianceColor);
         RobotLog.dd(TAG, "startPos: %s", startPosition);
-        RobotLog.dd(TAG, "Route Strategy: %s", autonStrategy);
         RobotLog.dd(TAG, "parkPos:  %s", parkPos);
         RobotLog.dd(TAG, "delay:    %4.1f", delay);
         RobotLog.dd(TAG, "xOffset:  %4.1f", xOffset);

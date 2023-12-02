@@ -11,7 +11,7 @@ public class DropOnTapeThenBackdrop {
         route = constructorRoute;
     }
 
-    public void makeTraj(Route.TeamElement teamElement, Field.Alliance alliance, PositionOption startPos, PositionOption autonStrategy, Field.stacksSideExtraPixelGrab extraPixelGrab)
+    public void makeTraj(Route.TeamElement teamElement, Field.Alliance alliance, PositionOption startPos, Field.stacksSideExtraPixelGrab extraPixelGrab)
     {
         statesRoute(teamElement, alliance, startPos, extraPixelGrab);
     }
