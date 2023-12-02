@@ -12,13 +12,24 @@ public class MoveToPark {
         route = constructorRoute;
    }
 
-    public void makeTraj(Field.ParkLocation parkPos, Field.Alliance alliance, Field.stacksSideExtraPixelGrab extraPixelGrab)
+    public void makeTraj(Field.ParkLocation parkPos, PositionOption startPos, Field.Alliance alliance, Field.stacksSideExtraPixelGrab extraPixelGrab, Route.TeamElement teamElement)
     {
         if (alliance == Field.Alliance.BLUE)
         {
-            if (extraPixelGrab == Field.stacksSideExtraPixelGrab.GRAB_EXTRA_PIXEL)
+            if (extraPixelGrab == Field.stacksSideExtraPixelGrab.GRAB_EXTRA_PIXEL && startPos == Field.StartPos.START_BACKDROP)
             {
-                route.addLocation(route.parkCenter,LINE,HEAD_LINEAR);
+                if (teamElement == Route.TeamElement.CENTER)
+                {
+                    route.addLocation(route.parkCenterCtr,LINE,HEAD_LINEAR);
+                }
+                if (teamElement == Route.TeamElement.LEFT)
+                {
+                    route.addLocation(route.parkCenterLft,LINE,HEAD_LINEAR);
+                }
+                if (teamElement == Route.TeamElement.RIGHT)
+                {
+                    route.addLocation(route.parkCenterRt,LINE,HEAD_LINEAR);
+                }
             }
             else if(parkPos == WALLSIDE_PARK)
             {

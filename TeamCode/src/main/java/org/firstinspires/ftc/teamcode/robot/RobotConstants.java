@@ -365,7 +365,7 @@ public class RobotConstants
 
                 BUTT_SPD = .49;
                 BORD_SPD = .3;
-                MAX_VEL = 50;
+                MAX_VEL = 100;
                 LATERAL_MULTIPLIER = 1.01;
                 DT_MOTOR = Motors.MotorModel.GOBILDA_5202_19_2;
                 DT_EXT_GEAR_RATIO = 0.997;

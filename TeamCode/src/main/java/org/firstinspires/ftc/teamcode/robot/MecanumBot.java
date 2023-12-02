@@ -275,16 +275,19 @@ public class MecanumBot extends ShelbyBot
     }
 
     public void setExtenderPower(double input){
-//        if(input >= .1 && extenderMotor.getCurEnc() < EX_MAX || input <= -.1 && extenderMotor.getCurEnc() > EX_MIN)
-//        {
-//            extenderMotor.moveAtControlRate(input);
-//            extenderStopped = false;
-//        }
-//        else
-//        {
-//            extenderStopped = true;
-//            extenderMotor.moveAtControlRate(0);
-//        }
+        if(input >= .1 && extenderMotor.getCurEnc() < EX_MAX || input <= -.1 && extenderMotor.getCurEnc() > EX_MIN)
+        {
+            extenderMotor.moveAtControlRate(input);
+            extenderStopped = false;
+        }
+        else
+        {
+            if (!extenderStopped)
+            {
+                extenderStopped = true;
+                extenderMotor.moveAtControlRate(0);
+            }
+        }
     }
 
     private enum servoState{
@@ -323,6 +326,19 @@ public class MecanumBot extends ShelbyBot
             Timer timer = new Timer();
             timer.schedule(task, 465);
         }
+
+    }
+    public void outTwoPixels()
+    {
+        setBucketServo(servoState.FORWARD);
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                setBucketServo(servoState.STOPPED);
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 800);
 
     }
 
