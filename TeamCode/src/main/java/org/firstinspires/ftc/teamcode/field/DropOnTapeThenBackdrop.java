@@ -102,32 +102,26 @@ public class DropOnTapeThenBackdrop {
                             route.addEvent(Route.Action.WAIT, 0.2);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.3);
-                            if (extraPixelGrab == NO_EXTRA_PIXEL)
-							{
-                            route.addLocation(route.moveFromRedLeftTapeStacks, LINE, HEAD_LINEAR);
-                            }
-						    else if(extraPixelGrab == GRAB_EXTRA_PIXEL)
-							{
-                                route.addLocation(route.pickUpPixelStackLeftTapeRed, LINE, HEAD_LINEAR);
-                                route.addFunction(route::armToIntake);
-                                route.addEvent(Route.Action.WAIT, 1);
-                                route.addFunction(route::allIntakesOn);
-                                route.addEvent(Route.Action.WAIT, .45);
-                                route.addFunction(route::armDropSpikePos,1);
-                                route.addFunction(route::outFrontPixel);
-                                route.addEvent(Route.Action.WAIT, .2);
-                            }
+                            route.addLocation(route.pickUpPixelStackLeftTapeRed, LINE, HEAD_LINEAR);
+                            route.addFunction(route::armToIntake);
+                            route.addEvent(Route.Action.WAIT, 1);
+                            route.addFunction(route::allIntakesOn);
+                            route.addEvent(Route.Action.WAIT, .45);
+                            route.addFunction(route::armDropSpikePos,1);
+                            route.addFunction(route::outFrontPixel);
+                            route.addEvent(Route.Action.WAIT, .2);
                             route.addLocation(route.moveTowardsLoadStation,LINE, HEAD_LINEAR);
                             route.addLocation(route.moveTowardsRedBackdropLft,LINE, HEAD_LINEAR);
                             route.addFunction(route::armToDrop);
+                            route.addMovement(TURN, 0.5);
                             route.addLocation(route.moveTowardsRedBackdropHdAdjLft,LINE, HEAD_LINEAR);
                             route.addLocation(route.dropOnBackdropRedLeftStacks, LINE, HEAD_LINEAR);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
                             route.addFunction(route::armToDropHigher);
                             route.addEvent(Route.Action.WAIT, 0.2);
-                            route.addFunction(route::outPixel);
                             route.addLocation(route.dropOnBackdropRedLeftStacksHi, LINE, HEAD_LINEAR);
+                            route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
                             route.addLocation(route.moveTowardsRedBackdropHdAdj,LINE, HEAD_LINEAR);
                             break;
@@ -140,27 +134,20 @@ public class DropOnTapeThenBackdrop {
                             route.addLocation(route.dropPixelRedCenterTapeStacks, LINE, HEAD_LINEAR);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
-                            if (extraPixelGrab == NO_EXTRA_PIXEL)
-							{
-                                route.addLocation(route.moveFromRedCenterTapeStacks, LINE, HEAD_LINEAR);
-                            }
-							else if(extraPixelGrab == GRAB_EXTRA_PIXEL)
-							{
-                                route.addLocation(route.pickUpPixelStackCenterTapeRed, LINE, HEAD_LINEAR);
-                                route.addFunction(route::armToIntake);
-                                route.addEvent(Route.Action.WAIT, 1);
-                                route.addFunction(route::allIntakesOn);
-                                route.addEvent(Route.Action.WAIT, .45);
-                                route.addFunction(route::armDropSpikePos,1);
-                                route.addFunction(route::outFrontPixel);
-                                route.addEvent(Route.Action.WAIT, .2);
-
-                            }
+                            route.addLocation(route.pickUpPixelStackCenterTapeRed, LINE, HEAD_LINEAR);
+                            route.addFunction(route::armToIntake);
+                            route.addEvent(Route.Action.WAIT, 1);
+                            route.addFunction(route::allIntakesOn);
+                            route.addEvent(Route.Action.WAIT, .45);
+                            route.addFunction(route::armDropSpikePos,1);
+                            route.addFunction(route::outFrontPixel);
+                            route.addEvent(Route.Action.WAIT, .2);
                             route.addLocation(route.moveTowardsLoadStation,LINE, HEAD_LINEAR);
                             route.addLocation(route.backAwayFromRedTape, LINE, HEAD_LINEAR);
                             route.addEvent(Route.Action.WAIT, 0.2);
                             route.addLocation(route.moveTowardsRedBackdrop,LINE, HEAD_LINEAR);
                             route.addEvent(Route.Action.WAIT, 0.2);
+                            route.addMovement(TURN, 0.5);
                             route.addFunction(route::armToDrop);
                             route.addLocation(route.moveTowardsRedBackdropHdAdj,LINE, HEAD_LINEAR);
                             route.addLocation(route.dropOnBackdropRedCenterStacks, LINE, HEAD_LINEAR);
@@ -178,26 +165,19 @@ public class DropOnTapeThenBackdrop {
                             // Red Right Stacks (7252)
                             route.addLocation(route.moveAwayFromWallRedStacks, LINE, HEAD_LINEAR);
                             route.addLocation(route.dropPixelRedRightTapeStacksAdj, LINE, HEAD_LINEAR);
-                            route.addFunction(route::armDropSpikePos);
                             route.addLocation(route.dropPixelRedRightTapeStacks, LINE, HEAD_LINEAR);
-                            route.addEvent(Route.Action.WAIT, 0.2);
+                            route.addFunction(route::armDropSpikePos);
+                            route.addEvent(Route.Action.WAIT, 0.4);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
-                            if (extraPixelGrab == NO_EXTRA_PIXEL)
-                            {
-                                route.addLocation(route.moveFromRedRightTapeStacks, LINE, HEAD_LINEAR);
-                            }
-                            else if(extraPixelGrab == GRAB_EXTRA_PIXEL)
-                            {
-                                route.addLocation(route.pickUpPixelStackRightTapeRed, LINE, HEAD_LINEAR);
-                                route.addFunction(route::armToIntake);
-                                route.addEvent(Route.Action.WAIT, 1);
-                                route.addFunction(route::allIntakesOn);
-                                route.addEvent(Route.Action.WAIT, .45);
-                                route.addFunction(route::armDropSpikePos,1);
-                                route.addFunction(route::outFrontPixel);
-                                route.addEvent(Route.Action.WAIT, .2);
-                            }
+                            route.addLocation(route.pickUpPixelStackRightTapeRed, LINE, HEAD_LINEAR);
+                            route.addFunction(route::armToIntake);
+                            route.addEvent(Route.Action.WAIT, 1);
+                            route.addFunction(route::allIntakesOn);
+                            route.addEvent(Route.Action.WAIT, .45);
+                            route.addFunction(route::armDropSpikePos);
+                            route.addFunction(route::outFrontPixel);
+                            route.addEvent(Route.Action.WAIT, .2);
                             route.addLocation(route.moveTowardsLoadStation,LINE, HEAD_LINEAR);
                             route.addLocation(route.backAwayFromRedTape, LINE, HEAD_LINEAR);
                             route.addEvent(Route.Action.WAIT, 0.2);
