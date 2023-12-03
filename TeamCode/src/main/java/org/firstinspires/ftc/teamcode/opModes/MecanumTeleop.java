@@ -850,7 +850,11 @@ public  int pixelSamplesSensor2 = 0;
             wristRestrictionsOff = true;
         }
         /* disable triangele button during Teleop to prevent accidental Drone Deployment */
-        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE) && enabledDroneLaunching==true)
+//        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE) && enabledDroneLaunching == true)
+//        {
+//            robot.droneLauncherServo.moveTo(1.0);
+//        }
+        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE))
         {
             robot.droneLauncherServo.moveTo(1.0);
         }

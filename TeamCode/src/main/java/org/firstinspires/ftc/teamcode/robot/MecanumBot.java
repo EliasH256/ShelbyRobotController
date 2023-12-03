@@ -275,19 +275,19 @@ public class MecanumBot extends ShelbyBot
     }
 
     public void setExtenderPower(double input){
-        if(input >= .1 && extenderMotor.getCurEnc() < EX_MAX || input <= -.1 && extenderMotor.getCurEnc() > EX_MIN)
-        {
-            extenderMotor.moveAtControlRate(input);
-            extenderStopped = false;
-        }
-        else
-        {
-            if (!extenderStopped)
-            {
-                extenderStopped = true;
-                extenderMotor.moveAtControlRate(0);
-            }
-        }
+//        if(input >= .1 && extenderMotor.getCurEnc() < EX_MAX || input <= -.1 && extenderMotor.getCurEnc() > EX_MIN)
+//        {
+//            extenderMotor.moveAtControlRate(input);
+//            extenderStopped = false;
+//        }
+//        else
+//        {
+//            if (!extenderStopped)
+//            {
+//                extenderStopped = true;
+//                extenderMotor.moveAtControlRate(0);
+//            }
+//        }
     }
 
     private enum servoState{

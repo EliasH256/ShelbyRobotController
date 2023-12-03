@@ -53,7 +53,22 @@ public class MoveToPark {
         }
         else if (alliance == Field.Alliance.RED)
         {
-            if(parkPos == WALLSIDE_PARK)
+            if (extraPixelGrab == Field.stacksSideExtraPixelGrab.GRAB_EXTRA_PIXEL && startPos == Field.StartPos.START_BACKDROP)
+            {
+                if (teamElement == Route.TeamElement.CENTER)
+                {
+                    route.addLocation(route.parkCenterCtr,LINE,HEAD_LINEAR);
+                }
+                if (teamElement == Route.TeamElement.LEFT)
+                {
+                    route.addLocation(route.parkCenterLftAdj,LINE,HEAD_LINEAR);
+                }
+                if (teamElement == Route.TeamElement.RIGHT)
+                {
+                    route.addLocation(route.parkCenterRtAdj,LINE,HEAD_LINEAR);
+                }
+            }
+            else if(parkPos == WALLSIDE_PARK)
             {
                 route.addLocation(route.parkWallAdjRed,LINE,HEAD_LINEAR);
                 route.addEvent(Route.Action.WAIT, 0.1);

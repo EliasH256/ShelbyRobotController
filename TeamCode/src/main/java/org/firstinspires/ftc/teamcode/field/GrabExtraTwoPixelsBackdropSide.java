@@ -84,9 +84,67 @@ public class GrabExtraTwoPixelsBackdropSide
         }
         else if (alliance == Field.Alliance.RED)
         {
-            route.addEvent(Route.Action.WAIT, 60);
+            if (teamElement == Route.TeamElement.CENTER)
+            {
+                route.addFunction(route::armDropSpikePos);
+                route.addLocation(route.redTwoPixelBackstage, LINE, HEAD_LINEAR);
+                route.addLocation(route.redTwoPixelStacks, LINE, HEAD_LINEAR);
+                route.addFunction(route::armToIntake);
+                route.addLocation(route.pickUpPixelStackCenterTapeRedBackdropAdj, LINE, HEAD_LINEAR);
+                route.addFunction(route::allIntakesOn);
+                route.addLocation(route.pickUpPixelStackCenterTapeRedBackdrop, LINE, HEAD_LINEAR);
+                route.addEvent(Route.Action.WAIT, 0.65);
+                route.addFunction(route::outFrontPixel);
+                route.addLocation(route.redTwoPixelStacks, LINE, HEAD_LINEAR);
+                route.addFunction(route::armDropSpikePos);
+                route.addLocation(route.redTwoPixelBackstage, LINE, HEAD_LINEAR);
+                route.addFunction(route::armToDropHigher);
+                route.addLocation(route.dropOnBackdropRedCenterTwoPixels, LINE, HEAD_LINEAR);
+                route.addEvent(Route.Action.WAIT, 0.1);
+                route.addFunction(route::outTwoPixels);
+                route.addEvent(Route.Action.WAIT, 0.6);
+            }
+            if (teamElement == Route.TeamElement.RIGHT)
+            {
+                route.addFunction(route::armDropSpikePos);
+                route.addLocation(route.redTwoPixelBackstageRt, LINE, HEAD_LINEAR);
+                route.addLocation(route.redTwoPixelStacksRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armToIntake);
+                route.addLocation(route.pickUpPixelStackRightTapeRedBackdropAdj, LINE, HEAD_LINEAR);
+                route.addFunction(route::allIntakesOn);
+                route.addLocation(route.pickUpPixelStackRightTapeRedBackdrop, LINE, HEAD_LINEAR);
+                route.addEvent(Route.Action.WAIT, 0.65);
+                route.addFunction(route::outFrontPixel);
+                route.addLocation(route.redTwoPixelStacksRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armDropSpikePos);
+                route.addLocation(route.redTwoPixelBackstageRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armToDropHigher);
+                route.addLocation(route.dropOnBackdropRedRightTwoPixels, LINE, HEAD_LINEAR);
+                route.addEvent(Route.Action.WAIT, 0.1);
+                route.addFunction(route::outTwoPixels);
+                route.addEvent(Route.Action.WAIT, 0.6);
+            }
+            if (teamElement == Route.TeamElement.LEFT)
+            {
+                route.addLocation(route.redTwoPixelBackstageRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armDropSpikePos);
+                route.addLocation(route.redTwoPixelStacksRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armToIntake);
+                route.addLocation(route.pickUpPixelStackLeftTapeRedBackdropAdj, LINE, HEAD_LINEAR);
+                route.addFunction(route::allIntakesOn);
+                route.addLocation(route.pickUpPixelStackLeftTapeRedBackdrop, LINE, HEAD_LINEAR);
+                route.addEvent(Route.Action.WAIT, 0.55);
+                route.addFunction(route::outFrontPixel);
+                route.addLocation(route.redTwoPixelStacksRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armDropSpikePos);
+                route.addLocation(route.redTwoPixelBackstageRt, LINE, HEAD_LINEAR);
+                route.addFunction(route::armToDropHigher);
+                route.addLocation(route.dropOnBackdropRedLeftTwoPixels, LINE, HEAD_LINEAR);
+                route.addEvent(Route.Action.WAIT, 0.1);
+                route.addFunction(route::outTwoPixels);
+                route.addEvent(Route.Action.WAIT, 0.6);
+            }
         }
-
     }
 }
 
