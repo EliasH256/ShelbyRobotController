@@ -171,7 +171,7 @@ public abstract class Route
         parkCenterRt = new Pose2d(sx * 42, sy * 44.5, flip + sh * Math.toRadians(270));
 
         parkCenterCtrAdj = new Pose2d(sx * 42, sy * 44.5, flip + sh * Math.toRadians(270));
-        parkCenterLftAdj = new Pose2d(sx * 33, sy * 46, flip + sh * Math.toRadians(270));
+        parkCenterLftAdj = new Pose2d(sx * 33, sy * 46.5, flip + sh * Math.toRadians(270));
         parkCenterRtAdj = new Pose2d(sx * 33, sy * 46, flip + sh * Math.toRadians(270));
 
         parkDoorAdj = new Pose2d(sx * 5, 45, flip + sh * Math.toRadians(270));
@@ -184,30 +184,30 @@ public abstract class Route
         /* Parks */
 
         /* Pixel Stack Grabs */
-        pickUpPixelStackCenterTapeBlue = new Pose2d(-38.5, -61.5, Math.toRadians(-90));
-        pickUpPixelStackRightTapeBlue = new Pose2d(-37, -59, Math.toRadians(-90));
+        pickUpPixelStackCenterTapeBlue = new Pose2d(-36.5, -60, Math.toRadians(-90));
+        pickUpPixelStackRightTapeBlue = new Pose2d(-36, -60, Math.toRadians(-90));
         pickUpPixelStackLeftTapeBlue = new Pose2d(-35, -60, Math.toRadians(-90));
 
-        pickUpPixelStackRightTapeRed = new Pose2d(35, -60, Math.toRadians(-90));
-        pickUpPixelStackLeftTapeRed = new Pose2d(36, -63.5, Math.toRadians(-90));
-        pickUpPixelStackCenterTapeRed = new Pose2d(38, -59, Math.toRadians(-90));
+        pickUpPixelStackRightTapeRed = new Pose2d(35, -61, Math.toRadians(-90));
+        pickUpPixelStackLeftTapeRed = new Pose2d(34, -63, Math.toRadians(-90));
+        pickUpPixelStackCenterTapeRed = new Pose2d(36, -60, Math.toRadians(-90));
 
-        pickUpPixelStackCenterTapeBlueBackdrop = new Pose2d(-37.5, -63.8, Math.toRadians(-90));
-        pickUpPixelStackCenterTapeBlueBackdropAdj = new Pose2d(-37.5, -60, Math.toRadians(-90));
+        pickUpPixelStackCenterTapeBlueBackdrop = new Pose2d(-35, -64, Math.toRadians(-90));
+        pickUpPixelStackCenterTapeBlueBackdropAdj = new Pose2d(-42, -55, Math.toRadians(-90));
 
-        pickUpPixelStackLeftTapeBlueBackdrop = new Pose2d(-36, -64.5, Math.toRadians(-90));
-        pickUpPixelStackLeftTapeBlueBackdropAdj = new Pose2d(-36, -60, Math.toRadians(-90));
+        pickUpPixelStackLeftTapeBlueBackdrop = new Pose2d(-32.5, -65, Math.toRadians(-90));
+        pickUpPixelStackLeftTapeBlueBackdropAdj = new Pose2d(-35, -55, Math.toRadians(-90));
 
         pickUpPixelStackRightTapeBlueBackdrop = new Pose2d(-37.5, -63.8, Math.toRadians(-90));
         pickUpPixelStackRightTapeBlueBackdropAdj = new Pose2d(-37.5, -60, Math.toRadians(-90));
 
-        pickUpPixelStackCenterTapeRedBackdrop = new Pose2d(31.5, -61.5, Math.toRadians(-90));
+        pickUpPixelStackCenterTapeRedBackdrop = new Pose2d(32, -62, Math.toRadians(-90));
         pickUpPixelStackCenterTapeRedBackdropAdj = new Pose2d(46, -50, Math.toRadians(-135));
 
-        pickUpPixelStackLeftTapeRedBackdrop = new Pose2d(28, -62, Math.toRadians(-90));
-        pickUpPixelStackLeftTapeRedBackdropAdj = new Pose2d(42, -44, Math.toRadians(-135));
+        pickUpPixelStackLeftTapeRedBackdrop = new Pose2d(30, -62, Math.toRadians(-90));
+        pickUpPixelStackLeftTapeRedBackdropAdj = new Pose2d(46, -44, Math.toRadians(-135));
 
-        pickUpPixelStackRightTapeRedBackdrop = new Pose2d(30, -61.5, Math.toRadians(-90));
+        pickUpPixelStackRightTapeRedBackdrop = new Pose2d(33, -61.5, Math.toRadians(-90));
         pickUpPixelStackRightTapeRedBackdropAdj = new Pose2d(42, -44, Math.toRadians(-135));
         /* Pixel Stack Grabs */
 
@@ -227,13 +227,13 @@ public abstract class Route
         blueTwoPixelBackstageRt = new Pose2d(-66, 24, Math.toRadians(270));
         blueTwoPixelStacksRt = new Pose2d(-66, -48, Math.toRadians(270));
 
-        redTwoPixelBackstageRt = new Pose2d(58, 24, Math.toRadians(270));
-        redTwoPixelStacksRt = new Pose2d(58, -36, Math.toRadians(270));
+        redTwoPixelBackstageRt = new Pose2d(60, 24, Math.toRadians(270));
+        redTwoPixelStacksRt = new Pose2d(60, -36, Math.toRadians(270));
 
         moveTowardsRedBackdrop = new Pose2d(65.5, 20, Math.toRadians(270));
         moveTowardsBlueBackdrop = new Pose2d(-60, 8, Math.toRadians(270));
 
-        moveTowardsRedBackdropLft = new Pose2d(62, 15, Math.toRadians(270));
+        moveTowardsRedBackdropLft = new Pose2d(64, 15, Math.toRadians(270));
 
         moveTowardsBlueBackdropHdAdj = new Pose2d(-35, 38, Math.toRadians(245));
         moveTowardsRedBackdropHdAdj = new Pose2d(44, 38, Math.toRadians(270));
@@ -242,7 +242,9 @@ public abstract class Route
 
         moveTowardsLoadStation = new Pose2d(62, -38, Math.toRadians(270));
 
-        moveTowardsRedBackdropHdAdjLft = new Pose2d(35, 30, Math.toRadians(295));
+        moveTowardsLoadStationLft = new Pose2d(64, -38, Math.toRadians(270));
+
+        moveTowardsRedBackdropHdAdjLft = new Pose2d(44, 30, Math.toRadians(295));
         moveTowardsRedBackdropHdAdjRt = new Pose2d(48, 45, Math.toRadians(295));
 
         dropPixelRedRightTapeBackdrop = new Pose2d(29, 22, Math.toRadians(0));
@@ -253,14 +255,14 @@ public abstract class Route
         dropPixelRedRightTapeBackdropAdj = new Pose2d(36, 22, Math.toRadians(0));
 
         dropPixelBlueRightTapeBackdrop = new Pose2d(-30, 5.5, Math.toRadians(90));
-        dropPixelBlueCenterTapeBackdrop = new Pose2d(-29, 15, Math.toRadians(180));
+        dropPixelBlueCenterTapeBackdrop = new Pose2d(-28, 15, Math.toRadians(180));
         dropPixelBlueLeftTapeBackdrop = new Pose2d(-33, 18, Math.toRadians(270));
 
         dropPixelBlueCenterBackTapeAdj = new Pose2d(-34, 15, Math.toRadians(-180));
         dropPixelRedCenterBackTapeAdj = new Pose2d(32, 18, Math.toRadians(0));
 
         dropPixelRedRightTapeStacks = new Pose2d(31, -29, Math.toRadians(270));
-        dropPixelRedCenterTapeStacks = new Pose2d(22, -44, Math.toRadians(270));
+        dropPixelRedCenterTapeStacks = new Pose2d(23, -43, Math.toRadians(280));
         dropPixelRedLeftTapeStacks = new Pose2d(31, -46.5, Math.toRadians(0));
 
         dropPixelRedRightTapeStacksAdj = new Pose2d(33, -35, Math.toRadians(270));
@@ -269,7 +271,7 @@ public abstract class Route
         dropPixelBlueCenterStkTapeAdj = new Pose2d(-27, -46, Math.toRadians(270));
 
         dropPixelBlueRightTapeStacks = new Pose2d(-27, -49, Math.toRadians(240));
-        dropPixelBlueCenterTapeStacks = new Pose2d(-19.5, -40, Math.toRadians(270));
+        dropPixelBlueCenterTapeStacks = new Pose2d(-24, -40, Math.toRadians(240));
         dropPixelBlueLeftTapeStacks = new Pose2d(-33, -27, Math.toRadians(270));
 
         dropPixelBlueLeftTapeStacksAdj = new Pose2d(-33, -45, Math.toRadians(270));
@@ -282,25 +284,25 @@ public abstract class Route
         moveFromRedRightTapeStacks = new Pose2d(32, -45, Math.toRadians(270));
         moveFromRedCenterTapeStacks = new Pose2d(24, -57, Math.toRadians(230));
 
-        dropOnBackdropBlueLeftBackdrop = new Pose2d(-42.5, 52.5, Math.toRadians(270));
-        dropOnBackdropBlueRightBackdrop = new Pose2d(-29, 53, Math.toRadians(270));
-        dropOnBackdropBlueCenterBackdrop = new Pose2d(-37, 53.5, Math.toRadians(270));
+        dropOnBackdropBlueLeftBackdrop = new Pose2d(-41, 52.5, Math.toRadians(270));
+        dropOnBackdropBlueRightBackdrop = new Pose2d(-30, 53, Math.toRadians(270));
+        dropOnBackdropBlueCenterBackdrop = new Pose2d(-35.5, 53.5, Math.toRadians(270));
 
-        dropOnBackdropBlueCenterTwoPixels = new Pose2d(-42, 57, Math.toRadians(270));
-        dropOnBackdropBlueRightTwoPixels = new Pose2d(-42, 55, Math.toRadians(270));
-        dropOnBackdropBlueLeftTwoPixels = new Pose2d(-35, 55, Math.toRadians(270));
+        dropOnBackdropBlueCenterTwoPixels = new Pose2d(-36, 57, Math.toRadians(270));
+        dropOnBackdropBlueRightTwoPixels = new Pose2d(-36, 58.3, Math.toRadians(270));
+        dropOnBackdropBlueLeftTwoPixels = new Pose2d(-30, 58, Math.toRadians(270));
 
-        dropOnBackdropRedCenterTwoPixels = new Pose2d(40, 55, Math.toRadians(270));
-        dropOnBackdropRedRightTwoPixels = new Pose2d(33, 57, Math.toRadians(270));
-        dropOnBackdropRedLeftTwoPixels = new Pose2d(33, 57, Math.toRadians(270));
+        dropOnBackdropRedCenterTwoPixels = new Pose2d(40, 57, Math.toRadians(270));
+        dropOnBackdropRedRightTwoPixels = new Pose2d(33, 59, Math.toRadians(270));
+        dropOnBackdropRedLeftTwoPixels = new Pose2d(33, 57.5, Math.toRadians(270));
 
         dropOnBackdropBlueLeftBackdropHi = new Pose2d(-43, 55.5, Math.toRadians(270));
         dropOnBackdropBlueRightBackdropHi = new Pose2d(-25, 55.5, Math.toRadians(270));
         dropOnBackdropBlueCenterBackdropHi = new Pose2d(-37, 55.5, Math.toRadians(270));
 
         dropOnBackdropRedLeftBackdrop = new Pose2d(22.5, 51.5, Math.toRadians(270));
-        dropOnBackdropRedRightBackdrop = new Pose2d(43, 54, Math.toRadians(270));
-        dropOnBackdropRedCenterBackdrop = new Pose2d(36.5, 51.8, Math.toRadians(270));
+        dropOnBackdropRedRightBackdrop = new Pose2d(43, 55, Math.toRadians(270));
+        dropOnBackdropRedCenterBackdrop = new Pose2d(35, 53, Math.toRadians(270));
 
         moveAwayFromCRedBackdropTape = new Pose2d(33, 17, Math.toRadians(40));
         moveAwayFromLRedBackdropTape = new Pose2d(32, 15, Math.toRadians(90));
@@ -318,21 +320,21 @@ public abstract class Route
         reverseFromRedBackdropStk = new Pose2d(36, 42, Math.toRadians(310));
         reverseFromBlueBackdropStk = new Pose2d(-36, 42, Math.toRadians(230));
 
-        dropOnBackdropBlueLeftStacks = new Pose2d(-42, 56, Math.toRadians(270));
-        dropOnBackdropBlueRightStacks = new Pose2d(-29, 55, Math.toRadians(270));
-        dropOnBackdropBlueCenterStacks = new Pose2d(-37, 52, Math.toRadians(270));
+        dropOnBackdropBlueLeftStacks = new Pose2d(-38, 55, Math.toRadians(270));
+        dropOnBackdropBlueRightStacks = new Pose2d(-33, 54, Math.toRadians(270));
+        dropOnBackdropBlueCenterStacks = new Pose2d(-39, 53, Math.toRadians(270));
 
-        dropOnBackdropBlueLeftStacksHi = new Pose2d(-47, 58.5, Math.toRadians(270));
-        dropOnBackdropBlueRightStacksHi = new Pose2d(-25, 59, Math.toRadians(270));
-        dropOnBackdropBlueCenterStacksHi = new Pose2d(-35, 55, Math.toRadians(270));
+        dropOnBackdropBlueLeftStacksHi = new Pose2d(-47, 58, Math.toRadians(270));
+        dropOnBackdropBlueRightStacksHi = new Pose2d(-25, 58, Math.toRadians(270));
+        dropOnBackdropBlueCenterStacksHi = new Pose2d(-37, 55, Math.toRadians(270));
 
-        dropOnBackdropRedLeftStacks = new Pose2d(33, 52, Math.toRadians(270));
-        dropOnBackdropRedRightStacks = new Pose2d(47, 61, Math.toRadians(270));
-        dropOnBackdropRedCenterStacks = new Pose2d(44, 57, Math.toRadians(270));
+        dropOnBackdropRedLeftStacks = new Pose2d(40, 54, Math.toRadians(270));
+        dropOnBackdropRedRightStacks = new Pose2d(40, 60.5, Math.toRadians(270));
+        dropOnBackdropRedCenterStacks = new Pose2d(50, 59.5, Math.toRadians(270));
 
-        dropOnBackdropRedLeftStacksHi = new Pose2d(27.5, 54.5, Math.toRadians(270));
-        dropOnBackdropRedRightStacksHi = new Pose2d(51.5, 64, Math.toRadians(270));
-        dropOnBackdropRedCenterStacksHi = new Pose2d(41.5, 58, Math.toRadians(270));
+        dropOnBackdropRedLeftStacksHi = new Pose2d(30, 56, Math.toRadians(270));
+        dropOnBackdropRedRightStacksHi = new Pose2d(51.5, 64.5, Math.toRadians(270));
+        dropOnBackdropRedCenterStacksHi = new Pose2d(42, 61, Math.toRadians(270));
 
         backAwayFromRedTape = new Pose2d(65.5, -30, Math.toRadians(270));
         backAwayFromBlueTape = new Pose2d(-60, -45, Math.toRadians(270));
@@ -446,6 +448,8 @@ public abstract class Route
 
     protected Pose2d moveTowardsRedBackdropLft;
     protected Pose2d moveTowardsLoadStation;
+
+    protected Pose2d moveTowardsLoadStationLft;
 
     protected Pose2d moveTowardsBlueBackdropHdAdj;
     protected Pose2d moveTowardsRedBackdropHdAdj;
@@ -825,10 +829,16 @@ public abstract class Route
      public void armDrivePos(){
         robot.elbowMotor.moveToLevel(1,1);
      }
-     public void armDropSpikePos(){
+     public void armDropSpikePos()
+     {
          robot.elbowMotor.moveToCnt(-750,1);
-         robot.wristServo.moveTo(.50);
-}
+         robot.wristServo.moveTo(.45);
+     }
+    public void armDropSpikePosSecond()
+    {
+        robot.elbowMotor.moveToCnt(-750,1);
+        robot.wristServo.moveTo(.50);
+    }
     public void outFrontPixel(){
         Timer timer = new Timer();
         robot.sweeperServo1.moveAtRate(-0.5);
@@ -849,7 +859,7 @@ public abstract class Route
         robot.sweeperServo2.moveAtRate(0);
     }
      public void armToDrop(){
-        robot.elbowMotor.moveToCnt(-1400,1);
+        robot.elbowMotor.moveToCnt(-1450,1);
         robot.wristServo.moveTo(0.600);
      }
 
@@ -857,7 +867,8 @@ public abstract class Route
         robot.elbowMotor.moveToCnt(-1650,1);
         robot.wristServo.moveTo(0.700);
     }
-    public void armToIntake(){
+    public void armToIntake()
+    {
         robot.elbowMotor.moveToLevel(0,1);
         robot.wristServo.moveTo(.195);
     }

@@ -726,21 +726,21 @@ public  int pixelSamplesSensor2 = 0;
         if (stackLvlCnt == 3 && ballRestrictionsOff)
         {
             robot.extenderMotor.setMode(RUN_USING_ENCODER);
-            robot.extenderMotor.moveToCnt(1400, 1);
+            robot.extenderMotor.moveToCnt(3750, 1);
             ballRestrictionsOff = false;
 
         }
         else if (stackLvlCnt == 4 && ballRestrictionsOff)
         {
             robot.extenderMotor.setMode(RUN_USING_ENCODER);
-            robot.extenderMotor.moveToCnt(2850, 1);
+            robot.extenderMotor.moveToCnt(7500, 1);
             ballRestrictionsOff = false;
 
         }
         else if (stackLvlCnt != 4 && ballRestrictionsOff)
         {
             robot.extenderMotor.setMode(RUN_USING_ENCODER);
-            robot.extenderMotor.moveToCnt(0, 1);
+            robot.extenderMotor.moveToCnt(5, 1);
             ballRestrictionsOff = false;
 
         }
@@ -781,13 +781,13 @@ public  int pixelSamplesSensor2 = 0;
                     stackLvlCnt = 0;
                     ballRestrictionsOff = true;
                 }
-                else if (robot.extenderMotor.getCurEnc() < 1500)
+                else if (robot.extenderMotor.getCurEnc() < 3000)
                 {
                     robot.elbowMotor.moveToLevel(0, 0.35);
                     stackLvlCnt = 0;
                     ballRestrictionsOff = true;
                 }
-                else if (robot.extenderMotor.getCurEnc() > 1500)
+                else if (robot.extenderMotor.getCurEnc() > 3000)
                 {
                     robot.elbowMotor.moveToLevel(0, 0.33);
                     stackLvlCnt = 0;
@@ -803,11 +803,11 @@ public  int pixelSamplesSensor2 = 0;
                     robot.elbowMotor.moveToLevel(1, EL_SPD);
                     stackLvlCnt = 1;
                     ballRestrictionsOff = true;
-                } else if (robot.extenderMotor.getCurEnc() < 1500) {
+                } else if (robot.extenderMotor.getCurEnc() < 3000) {
                     robot.elbowMotor.moveToLevel(1, 0.35);
                     stackLvlCnt = 1;
                     ballRestrictionsOff = true;
-                } else if (robot.extenderMotor.getCurEnc() > 1500) {
+                } else if (robot.extenderMotor.getCurEnc() > 3000) {
                     robot.elbowMotor.moveToLevel(1, 0.33);
                     stackLvlCnt = 1;
                     ballRestrictionsOff = true;
@@ -826,19 +826,26 @@ public  int pixelSamplesSensor2 = 0;
         }
 
         if(gpad2.just_pressed(ManagedGamepad.Button.B_PS4_CIRCLE) && !gpad2.pressed(ManagedGamepad.Button.START)) {
-            if (!ballfinalclim & !ballfinalclimout) {
+            if (!ballfinalclim & !ballfinalclimout)
+            {
                 robot.elbowMotor.moveToCnt(-2400, 1);
                 ballfinalclim = true;
-            } else if (ballfinalclim & !ballfinalclimout & robot.elbowMotor.getCurEnc() < -2300) {
+            }
+            else if (ballfinalclim & !ballfinalclimout & robot.elbowMotor.getCurEnc() < -2300)
+            {
                 robot.extenderMotor.setMode(RUN_USING_ENCODER);
-                robot.extenderMotor.moveToCnt(2850, 1);
+                robot.extenderMotor.moveToCnt(7500, 1);
                 ballfinalclimout = true;
-            } else if (ballfinalclim & ballfinalclimout) {
+            }
+            else if (ballfinalclim & ballfinalclimout)
+            {
                 ballfinalclim = false;
                 ballfinalclimout = false;
                 robot.extenderMotor.setMode(RUN_USING_ENCODER);
-                robot.extenderMotor.moveToCnt(0, 1);
-            } else {
+                robot.extenderMotor.moveToCnt(5, 1);
+            }
+            else
+            {
                 robot.elbowMotor.moveToCnt(-2400, 1);
                 ballfinalclim = true;
 
@@ -850,14 +857,14 @@ public  int pixelSamplesSensor2 = 0;
             wristRestrictionsOff = true;
         }
         /* disable triangele button during Teleop to prevent accidental Drone Deployment */
-//        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE) && enabledDroneLaunching == true)
-//        {
-//            robot.droneLauncherServo.moveTo(1.0);
-//        }
-        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE))
+        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE) && enabledDroneLaunching == true)
         {
             robot.droneLauncherServo.moveTo(1.0);
         }
+//        if(gpad2.just_pressed(ManagedGamepad.Button.Y_PS4_TRIANGLE))
+//        {
+//            robot.droneLauncherServo.moveTo(1.0);
+//        }
 
 
         controlArm();

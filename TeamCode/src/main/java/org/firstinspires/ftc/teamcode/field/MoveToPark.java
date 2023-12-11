@@ -20,15 +20,15 @@ public class MoveToPark {
             {
                 if (teamElement == Route.TeamElement.CENTER)
                 {
-                    route.addLocation(route.parkCenterCtr,LINE,HEAD_LINEAR);
+                    route.addEvent(Route.Action.WAIT, 0.1);
                 }
                 if (teamElement == Route.TeamElement.LEFT)
                 {
-                    route.addLocation(route.parkCenterLft,LINE,HEAD_LINEAR);
+                    route.addEvent(Route.Action.WAIT, 0.1);
                 }
                 if (teamElement == Route.TeamElement.RIGHT)
                 {
-                    route.addLocation(route.parkCenterRt,LINE,HEAD_LINEAR);
+                    route.addEvent(Route.Action.WAIT, 0.1);
                 }
             }
             else if(parkPos == WALLSIDE_PARK)
@@ -57,15 +57,15 @@ public class MoveToPark {
             {
                 if (teamElement == Route.TeamElement.CENTER)
                 {
-                    route.addLocation(route.parkCenterCtr,LINE,HEAD_LINEAR);
+                    route.addEvent(Route.Action.WAIT, 0.1);
                 }
                 if (teamElement == Route.TeamElement.LEFT)
                 {
-                    route.addLocation(route.parkCenterLftAdj,LINE,HEAD_LINEAR);
+                    route.addEvent(Route.Action.WAIT, 0.1);
                 }
                 if (teamElement == Route.TeamElement.RIGHT)
                 {
-                    route.addLocation(route.parkCenterRtAdj,LINE,HEAD_LINEAR);
+                    route.addEvent(Route.Action.WAIT, 0.1);
                 }
             }
             else if(parkPos == WALLSIDE_PARK)

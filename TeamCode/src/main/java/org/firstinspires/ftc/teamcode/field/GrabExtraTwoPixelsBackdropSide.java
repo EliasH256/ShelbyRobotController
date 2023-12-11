@@ -22,17 +22,17 @@ public class GrabExtraTwoPixelsBackdropSide
         {
             if (teamElement == Route.TeamElement.CENTER)
             {
-                route.addFunction(route::armDropSpikePos);
+                route.addFunction(route::armDropSpikePosSecond);
                 route.addLocation(route.blueTwoPixelBackstage, LINE, HEAD_LINEAR);
                 route.addLocation(route.blueTwoPixelStacks, LINE, HEAD_LINEAR);
                 route.addFunction(route::armToIntake);
-                route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addFunction(route::allIntakesOn);
+                route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdrop, LINE, HEAD_LINEAR);
-                route.addEvent(Route.Action.WAIT, 0.65);
+                route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addFunction(route::outFrontPixel);
                 route.addLocation(route.blueTwoPixelStacks, LINE, HEAD_LINEAR);
-                route.addFunction(route::armDropSpikePos);
+                route.addFunction(route::armDropSpikePosSecond);
                 route.addLocation(route.blueTwoPixelBackstage, LINE, HEAD_LINEAR);
                 route.addFunction(route::armToDropHigher);
                 route.addLocation(route.dropOnBackdropBlueCenterTwoPixels, LINE, HEAD_LINEAR);
@@ -43,17 +43,16 @@ public class GrabExtraTwoPixelsBackdropSide
             if (teamElement == Route.TeamElement.RIGHT)
             {
                 route.addMovement(TURN, -0.5);
-                route.addFunction(route::armDropSpikePos);
+                route.addFunction(route::armDropSpikePosSecond);
                 route.addLocation(route.blueTwoPixelBackstageRt, LINE, HEAD_LINEAR);
                 route.addLocation(route.blueTwoPixelStacksRt, LINE, HEAD_LINEAR);
                 route.addFunction(route::armToIntake);
-                route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addFunction(route::allIntakesOn);
+                route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addLocation(route.pickUpPixelStackCenterTapeBlueBackdrop, LINE, HEAD_LINEAR);
-                route.addEvent(Route.Action.WAIT, 0.65);
-                route.addFunction(route::outFrontPixel);
                 route.addLocation(route.blueTwoPixelStacksRt, LINE, HEAD_LINEAR);
-                route.addFunction(route::armDropSpikePos);
+                route.addFunction(route::outFrontPixel);
+                route.addFunction(route::armDropSpikePosSecond);
                 route.addLocation(route.blueTwoPixelBackstageRt, LINE, HEAD_LINEAR);
                 route.addFunction(route::armToDropHigher);
                 route.addLocation(route.dropOnBackdropBlueRightTwoPixels, LINE, HEAD_LINEAR);
@@ -64,16 +63,15 @@ public class GrabExtraTwoPixelsBackdropSide
             if (teamElement == Route.TeamElement.LEFT)
             {
                 route.addLocation(route.blueTwoPixelBackstage, LINE, HEAD_LINEAR);
-                route.addFunction(route::armDropSpikePos);
+                route.addFunction(route::armDropSpikePosSecond);
                 route.addLocation(route.blueTwoPixelStacks, LINE, HEAD_LINEAR);
                 route.addFunction(route::armToIntake);
-                route.addLocation(route.pickUpPixelStackLeftTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addFunction(route::allIntakesOn);
+                route.addLocation(route.pickUpPixelStackLeftTapeBlueBackdropAdj, LINE, HEAD_LINEAR);
                 route.addLocation(route.pickUpPixelStackLeftTapeBlueBackdrop, LINE, HEAD_LINEAR);
-                route.addEvent(Route.Action.WAIT, 0.65);
                 route.addFunction(route::outFrontPixel);
                 route.addLocation(route.blueTwoPixelStacks, LINE, HEAD_LINEAR);
-                route.addFunction(route::armDropSpikePos);
+                route.addFunction(route::armDropSpikePosSecond);
                 route.addLocation(route.blueTwoPixelBackstage, LINE, HEAD_LINEAR);
                 route.addFunction(route::armToDropHigher);
                 route.addLocation(route.dropOnBackdropBlueLeftTwoPixels, LINE, HEAD_LINEAR);

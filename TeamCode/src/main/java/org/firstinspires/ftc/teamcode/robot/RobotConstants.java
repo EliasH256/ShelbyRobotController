@@ -85,7 +85,7 @@ public class RobotConstants
     public static DcMotorSimple.Direction SWP_DIR = DcMotorSimple.Direction.REVERSE;
     public static DcMotorSimple.Direction SWP_DIR2 = DcMotorSimple.Direction.FORWARD;
     public static Motors.MotorModel EL_EXT_MOT = Motors.MotorModel.GOBILDA_5202_139;
-    public static Motors.MotorModel EL_EX_MOT = Motors.MotorModel.GOBILDA_5202_5_2;
+    public static Motors.MotorModel EL_EX_MOT = Motors.MotorModel.GOBILDA_5202_13_7;
     public static Double SWP_SRV = 4.8;
 
     public static DcMotorSimple.Direction TR_DIR = DcMotorSimple.Direction.FORWARD;
@@ -140,15 +140,15 @@ public class RobotConstants
 
     //These values are for red
     public static double IP_HUE_MIN_RED = 0.0;
-    public static double IP_HUE_MAX_RED = 10.0;
-    public static double IP_SAT_MIN_RED = 101.0;
+    public static double IP_HUE_MAX_RED = 40.0;
+    public static double IP_SAT_MIN_RED = 75.0;
     public static double IP_SAT_MAX_RED = 255.0;
     public static double IP_VAL_MIN_RED = 101.0;
     public static double IP_VAL_MAX_RED = 255.0;
 
     //These values are for blue
-    public static double IP_HUE_MIN_BLUE = 105.0;
-    public static double IP_HUE_MAX_BLUE = 180.0;
+    public static double IP_HUE_MIN_BLUE = 85.0;
+    public static double IP_HUE_MAX_BLUE = 200.0;
     public static double IP_SAT_MIN_BLUE = 101.0;
     public static double IP_SAT_MAX_BLUE = 255.0;
     public static double IP_VAL_MIN_BLUE = 101.0;

@@ -294,15 +294,28 @@ public class CenterStageAuton extends InitLinearOpMode // implements FtcMenu.Men
         ShelbyBot.curOpModeType = ShelbyBot.OpModeType.AUTO;
 
         robot.init(this, chas, true);
+        if(robot.extenderMotor != null)
+        {
+            try
+            {
+                robot.initExMot();
+            }
+            catch (InterruptedException e)
+            {
+                RobotLog.dd(TAG, "INIT EXT MOTOR FAILED");
+            }
+        }
         if(robot.elbowMotor != null)
         {
-            try {
+            try
+            {
                 robot.initElbMot();
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 RobotLog.dd(TAG, "Stopped mid init for arm encoder reset");
             }
         }
-
         RobotConstants.info();
 
         robot.setBcm(LynxModule.BulkCachingMode.MANUAL);

@@ -234,8 +234,6 @@ public class MecanumBot extends ShelbyBot
                 greenLED2.setState(true);
                 redLED2.setState(true);
                 break;
-
-
         }
     }
 
@@ -247,11 +245,11 @@ public class MecanumBot extends ShelbyBot
         elbowMotor.moveToLevel(0,EL_SPD);
     }
     public void initExMot () throws InterruptedException {
-        extenderMotor.moveToCnt(-2500,.3);
+        extenderMotor.moveToCnt(-100,.1);
         Thread.sleep(4000);
         extenderMotor.setMode(STOP_AND_RESET_ENCODER);
         extenderMotor.setMode(RUN_USING_ENCODER);
-        extenderMotor.moveToCnt(0, 0.1);
+        extenderMotor.moveToCnt(25, 0.1);
     }
 
     public void setElbowMotor(double input){

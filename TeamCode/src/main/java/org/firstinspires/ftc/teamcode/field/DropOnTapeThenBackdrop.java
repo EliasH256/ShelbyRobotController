@@ -20,7 +20,7 @@ public class DropOnTapeThenBackdrop {
         {
             switch ((Field.StartPos)startPos)
             {
-                /* Blue Alliance */
+                /* Red Alliance */
                 case START_BACKDROP:
                     route.addLocation(route.start, SPLINE, HEAD_LINEAR);
                     switch (teamElement)
@@ -31,7 +31,7 @@ public class DropOnTapeThenBackdrop {
                             route.addLocation(route.dropPixelRedLeftTapeBackdropAdj, LINE, HEAD_LINEAR);
                             route.addLocation(route.dropPixelRedLeftTapeBackdrop, LINE, HEAD_LINEAR);
                             route.addFunction(route::armDropSpikePos);
-                            route.addEvent(Route.Action.WAIT, 0.3);
+                            route.addEvent(Route.Action.WAIT, 0.4);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
                             route.addFunction(route::armToDrop);
@@ -92,13 +92,12 @@ public class DropOnTapeThenBackdrop {
                             route.addEvent(Route.Action.WAIT, 1);
                             route.addFunction(route::allIntakesOn);
                             route.addEvent(Route.Action.WAIT, .45);
-                            route.addFunction(route::armDropSpikePos,1);
+                            route.addFunction(route::armDropSpikePos);
                             route.addFunction(route::outFrontPixel);
                             route.addEvent(Route.Action.WAIT, .2);
-                            route.addLocation(route.moveTowardsLoadStation,LINE, HEAD_LINEAR);
+                            route.addLocation(route.moveTowardsLoadStationLft,LINE, HEAD_LINEAR);
                             route.addLocation(route.moveTowardsRedBackdropLft,LINE, HEAD_LINEAR);
                             route.addFunction(route::armToDrop);
-                            route.addMovement(TURN, 0.5);
                             route.addLocation(route.moveTowardsRedBackdropHdAdjLft,LINE, HEAD_LINEAR);
                             route.addLocation(route.dropOnBackdropRedLeftStacks, LINE, HEAD_LINEAR);
                             route.addFunction(route::outPixel);
@@ -124,9 +123,9 @@ public class DropOnTapeThenBackdrop {
                             route.addEvent(Route.Action.WAIT, 1);
                             route.addFunction(route::allIntakesOn);
                             route.addEvent(Route.Action.WAIT, .45);
-                            route.addFunction(route::armDropSpikePos,1);
                             route.addFunction(route::outFrontPixel);
                             route.addEvent(Route.Action.WAIT, .2);
+                            route.addFunction(route::armDropSpikePos);
                             route.addLocation(route.moveTowardsLoadStation,LINE, HEAD_LINEAR);
                             route.addLocation(route.backAwayFromRedTape, LINE, HEAD_LINEAR);
                             route.addEvent(Route.Action.WAIT, 0.2);
@@ -214,7 +213,6 @@ public class DropOnTapeThenBackdrop {
                         case CENTER:
                             // Blue Center Backdrop (7252)
                             route.addLocation(route.moveAwayFromWallBlueBackdrop, LINE, HEAD_LINEAR);
-                            route.addLocation(route.dropPixelBlueCenterBackTapeAdj, LINE, HEAD_LINEAR);
                             route.addFunction(route::armDropSpikePos);
                             route.addLocation(route.dropPixelBlueCenterTapeBackdrop, LINE, HEAD_LINEAR);
                             route.addEvent(Route.Action.WAIT, 0.2);
@@ -258,7 +256,6 @@ public class DropOnTapeThenBackdrop {
                             route.addFunction(route::armDropSpikePos);
                             route.addEvent(Route.Action.WAIT, 0.2);
                             route.addLocation(route.dropPixelBlueLeftTapeStacks, LINE, HEAD_LINEAR);
-                            route.addEvent(Route.Action.WAIT, 0.1);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
                             route.addLocation(route.pickUpPixelStackLeftTapeBlue, LINE, HEAD_LINEAR);
@@ -268,7 +265,7 @@ public class DropOnTapeThenBackdrop {
                             route.addEvent(Route.Action.WAIT, 0.65);
                             route.addFunction(route::outFrontPixel);
                             route.addEvent(Route.Action.WAIT, .2);
-                            route.addFunction(route::armDropSpikePos, .5);
+                            route.addFunction(route::armDropSpikePos);
                             route.addLocation(route.moveFromBlueRightTapeStacks, LINE, HEAD_LINEAR);
                             route.addLocation(route.backAwayFromBlueTape, LINE, HEAD_LINEAR);
                             route.addEvent(Route.Action.WAIT, 0.2);
@@ -292,7 +289,6 @@ public class DropOnTapeThenBackdrop {
                             route.addLocation(route.moveAwayFromWallBlueStacks, LINE, HEAD_LINEAR);
                             route.addFunction(route::armDropSpikePos);
                             route.addEvent(Route.Action.WAIT, 0.2);
-                            route.addLocation(route.dropPixelBlueCenterStkTapeAdj, LINE, HEAD_LINEAR);
                             route.addLocation(route.dropPixelBlueCenterTapeStacks, LINE, HEAD_LINEAR);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
@@ -311,7 +307,7 @@ public class DropOnTapeThenBackdrop {
                             route.addEvent(Route.Action.WAIT, 0.2);
                             route.addFunction(route::armToDrop);
                             route.addMovement(TURN, -0.5);
-                            route.addLocation(route.moveTowardsBlueBackdropHdAdjAdj,LINE, HEAD_LINEAR);
+                            route.addLocation(route.moveTowardsBlueBackdropHdAdjAdj, LINE, HEAD_LINEAR);
                             route.addLocation(route.dropOnBackdropBlueCenterStacks, LINE, HEAD_LINEAR);
                             route.addFunction(route::outPixel);
                             route.addEvent(Route.Action.WAIT, 0.5);
